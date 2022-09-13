@@ -1,4 +1,4 @@
-import 'package:everest_card2_listagem/present/wallet/widgets/splash_screen.dart';
+import 'package:everest_card2_listagem/presenter/wallet/widgets/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

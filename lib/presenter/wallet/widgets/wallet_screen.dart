@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -11,9 +12,11 @@ class WalletScreen extends StatefulWidget {
 class _WalletScreenState extends State<WalletScreen> {
   bool isVisible = true;
 
-  double btcValue = 6557.00;
-  double ethValue = 7996.00;
-  double ltcValue = 245.00;
+  static double btcValue = 6557.00;
+  static double ethValue = 7996.00;
+  static double ltcValue = 245.00;
+
+  double totalCrypto = btcValue + ethValue + ltcValue;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,6 @@ class _WalletScreenState extends State<WalletScreen> {
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
-                          fontFamily: 'Montserrat',
                           color: Color.fromRGBO(224, 43, 87, 1),
                         ),
                       ),
@@ -60,12 +62,11 @@ class _WalletScreenState extends State<WalletScreen> {
                       ),
                     ),
                     visible: isVisible,
-                    child: const Text(
-                      'R\$ 14.798,00',
-                      style: TextStyle(
+                    child: Text(
+                      UtilBrasilFields.obterReal(totalCrypto),
+                      style: const TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.w700,
-                        fontFamily: 'Montserrat',
                       ),
                     ),
                   ),
@@ -144,9 +145,7 @@ class _WalletScreenState extends State<WalletScreen> {
                           ),
                           visible: isVisible,
                           child: Text(
-                            NumberFormat.simpleCurrency(
-                                    locale: 'pt-BR', decimalDigits: 2)
-                                .format(btcValue),
+                            UtilBrasilFields.obterReal(btcValue),
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 19,
@@ -242,9 +241,7 @@ class _WalletScreenState extends State<WalletScreen> {
                           ),
                           visible: isVisible,
                           child: Text(
-                            NumberFormat.simpleCurrency(
-                                    locale: 'pt-BR', decimalDigits: 2)
-                                .format(ethValue),
+                            UtilBrasilFields.obterReal(ethValue),
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 19,
@@ -340,9 +337,9 @@ class _WalletScreenState extends State<WalletScreen> {
                             ),
                           ),
                           visible: isVisible,
-                          child: const Text(
-                            'R\$ 245,00',
-                            style: TextStyle(
+                          child: Text(
+                            UtilBrasilFields.obterReal(ltcValue),
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 19,
                             ),
@@ -352,11 +349,9 @@ class _WalletScreenState extends State<WalletScreen> {
                           height: 5,
                         ),
                         if (isVisible)
-                          Text(
-                            NumberFormat.simpleCurrency(
-                                    locale: 'pt-BR', decimalDigits: 2)
-                                .format(ltcValue),
-                            style: const TextStyle(
+                          const Text(
+                            '0.82 LTC',
+                            style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: Color.fromRGBO(117, 118, 128, 1)),
