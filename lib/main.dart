@@ -1,8 +1,13 @@
-import 'package:everest_card2_listagem/presenter/wallet/widgets/splash_screen.dart';
+import 'screen/wallet/widgets/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
