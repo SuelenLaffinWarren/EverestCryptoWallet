@@ -3,10 +3,9 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/provider/providers.dart';
-import 'bottom_navigation_bar_wallet_screen.dart';
-import 'info_title_wallet_column_screen.dart';
-import 'row_list_wallet_screen.dart';
+import 'provider/providers.dart';
+import '../bottom_navigation_bar/bottom_navigation_bar_wallet_screen.dart';
+import 'widgtes/portofolio_screen.dart';
 
 class WalletScreen extends StatefulHookConsumerWidget {
   const WalletScreen({Key? key}) : super(key: key);
@@ -36,28 +35,18 @@ class _WalletScreenState extends ConsumerState<WalletScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-              child: InfoTitleColumnWallet(
-                  isVisibleState: isVisibleState.state,
-                  totalCrypto: totalCrypto),
-            ),
-            RowListWallet(
-                isVisibleState: isVisibleState,
-                totalCrypto: totalCrypto,
-                btcValue: btcValue,
-                quantityBtc: quantityBtc,
-                abrvBtc: abrvBtc,
-                ethValue: ethValue,
-                quantityEth: quantityEth,
-                abrvEth: abrvEth,
-                ltcValue: ltcValue,
-                quantityLtc: quantityLtc,
-                abrvLtc: abrvLtc),
-          ],
-        ),
+        child: PortfolioScreen(
+            isVisibleState: isVisibleState,
+            totalCrypto: totalCrypto,
+            btcValue: btcValue,
+            quantityBtc: quantityBtc,
+            abrvBtc: abrvBtc,
+            ethValue: ethValue,
+            quantityEth: quantityEth,
+            abrvEth: abrvEth,
+            ltcValue: ltcValue,
+            quantityLtc: quantityLtc,
+            abrvLtc: abrvLtc),
       ),
       bottomNavigationBar: const BottomNavigationBarWalletCrypto(),
     );

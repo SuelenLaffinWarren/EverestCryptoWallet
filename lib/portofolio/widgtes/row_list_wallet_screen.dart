@@ -2,7 +2,7 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/provider/providers.dart';
+import '../provider/providers.dart';
 import 'row_wallet_screen.dart';
 
 class RowListWallet extends StatefulHookConsumerWidget {
