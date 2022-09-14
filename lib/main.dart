@@ -1,9 +1,6 @@
-import 'package:everest_card2_listagem/movimentations/movimentations_screen.dart';
-import 'package:everest_card2_listagem/portofolio/home_wallet_screen.dart';
+import 'package:everest_card2_listagem/shared/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'shared/splash/splash_screen.dart';
 
 void main() {
   runApp(
@@ -24,12 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const SplashScreen(),
-        '/wallet_screen': (context) => const WalletScreen(),
-        '/movimentations_screen': (context) => const MovimentationsScreen(),
-      },
+      home: const SplashScreen(),
     );
   }
 }
