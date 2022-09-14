@@ -58,7 +58,7 @@ class _WalletScreenState extends ConsumerState<HomePortofolioScreen> {
           BottomNavigationBarItem(
             icon: Image.asset('assets/images/Warren_False.png'),
             activeIcon: Image.asset('assets/images/warrenTrue.png'),
-            label: 'Portifólio',
+            label: 'Portfólio',
           ),
           BottomNavigationBarItem(
             icon: Image.asset('assets/images/crypto_false.png'),
