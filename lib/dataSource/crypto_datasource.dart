@@ -5,6 +5,7 @@ class CryptoDatasource {
   List<CryptoModel> getAllCrypto() {
     return [
       CryptoModel(
+        onTapDetails: () {},
         currentePriceCrypto: Decimal.parse('100745.00'),
         totalCrypto: Decimal.parse('6557.00'),
         quantity: 0.65,
@@ -13,6 +14,7 @@ class CryptoDatasource {
         nameCrypto: 'Bitcoin',
       ),
       CryptoModel(
+        onTapDetails: () {},
         currentePriceCrypto: Decimal.parse('100745.00'),
         totalCrypto: Decimal.parse('7996.00'),
         quantity: 0.94,
@@ -21,6 +23,7 @@ class CryptoDatasource {
         nameCrypto: 'Ethereum',
       ),
       CryptoModel(
+        onTapDetails: () {},
         currentePriceCrypto: Decimal.parse('100745.00'),
         totalCrypto: Decimal.parse('245.00'),
         quantity: 0.82,
