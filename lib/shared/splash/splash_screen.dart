@@ -1,4 +1,4 @@
-import '../../portofolio/home_wallet_screen.dart';
+import '../../portofolio/home_portofolio_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
       (value) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
-            return const WalletScreen();
+            return const HomePortofolioScreen();
           },
         ),
       ),
