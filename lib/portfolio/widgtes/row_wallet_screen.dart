@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:decimal/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,6 +12,7 @@ class RowCryptoScreen extends StatefulHookConsumerWidget {
   String imageCrypto;
   String nameCrypto;
   String abrevNameCrypto;
+  Function() onTapDetails;
 
   RowCryptoScreen({
     Key? key,
@@ -19,6 +21,7 @@ class RowCryptoScreen extends StatefulHookConsumerWidget {
     required this.imageCrypto,
     required this.nameCrypto,
     required this.abrevNameCrypto,
+    required this.onTapDetails,
   }) : super(key: key);
 
   @override
@@ -32,6 +35,7 @@ class _RowCryptoScreenState extends ConsumerState<RowCryptoScreen> {
     final isVisible = ref.watch(visibilityProvider.state);
 
     return ListTile(
+      onTap: widget.onTapDetails,
       horizontalTitleGap: 0,
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(48),

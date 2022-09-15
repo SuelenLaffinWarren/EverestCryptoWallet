@@ -6,8 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'info_title_wallet_column_screen.dart';
 import 'row_list_wallet_screen.dart';
 
-class ColumnPortofolio extends StatefulHookConsumerWidget {
-  const ColumnPortofolio({
+class ColumnPortfolio extends StatefulHookConsumerWidget {
+  const ColumnPortfolio({
     Key? key,
     required this.isVisibleState,
     required this.totalCrypto,
@@ -35,10 +35,10 @@ class ColumnPortofolio extends StatefulHookConsumerWidget {
   final String abrvLtc;
 
   @override
-  ConsumerState<ColumnPortofolio> createState() => _PortfolioScreenState();
+  ConsumerState<ColumnPortfolio> createState() => _PortfolioScreenState();
 }
 
-class _PortfolioScreenState extends ConsumerState<ColumnPortofolio> {
+class _PortfolioScreenState extends ConsumerState<ColumnPortfolio> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

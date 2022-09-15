@@ -1,4 +1,4 @@
-import '../../portofolio/home_portofolio_screen.dart';
+import '../../portfolio/view/home_portofolio_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
