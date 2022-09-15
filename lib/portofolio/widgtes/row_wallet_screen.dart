@@ -27,110 +27,103 @@ class RowCryptoScreen extends StatefulHookConsumerWidget {
 
 class _RowCryptoScreenState extends ConsumerState<RowCryptoScreen> {
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     @override
     final isVisible = ref.watch(visibilityProvider.state);
 
-    return Padding(
-      padding: const EdgeInsets.only(left: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(48),
-                child: Image.asset(
-                  widget.imageCrypto,
-                  width: 48,
-                  height: 48,
-                ),
+    return ListTile(
+      horizontalTitleGap: 0,
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(48),
+        child: Image.asset(
+          widget.imageCrypto,
+          width: 48,
+          height: 48,
+        ),
+      ),
+      title: Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              textAlign: TextAlign.start,
+              widget.abrevNameCrypto,
+              style: const TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 19,
               ),
-              const SizedBox(
-                width: 8,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    textAlign: TextAlign.start,
-                    widget.abrevNameCrypto,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            isVisible.state
+                ? Text(
+                    NumberFormat.simpleCurrency(
+                            locale: 'pt-BR', decimalDigits: 2)
+                        .format(
+                      DecimalIntl(widget.value),
+                    ),
                     style: const TextStyle(
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w400,
                       fontSize: 19,
                     ),
+                  )
+                : SizedBox(
+                    child: Container(
+                      width: 110,
+                      height: 20,
+                      color: Colors.grey.shade200,
+                    ),
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    widget.nameCrypto,
+          ],
+        ),
+      ),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(left: 10, top: 5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              widget.nameCrypto,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
+                color: Color.fromRGBO(117, 118, 128, 1),
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            isVisible.state
+                ? Text(
+                    '${widget.quantityCrypto} ${widget.abrevNameCrypto}',
                     style: const TextStyle(
-                      fontWeight: FontWeight.w500,
                       fontSize: 15,
+                      fontWeight: FontWeight.w500,
                       color: Color.fromRGBO(117, 118, 128, 1),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Row(
-            children: [
-              isVisible.state
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          NumberFormat.simpleCurrency(
-                                  locale: 'pt-BR', decimalDigits: 2)
-                              .format(
-                            DecimalIntl(widget.value),
-                          ),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 19,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          '${widget.quantityCrypto} ${widget.abrevNameCrypto}',
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(117, 118, 128, 1),
-                          ),
-                        ),
-                      ],
-                    )
-                  : SizedBox(
-                      child: Container(
-                        width: 100,
-                        height: 28,
-                        color: Colors.grey.shade200,
-                      ),
+                  )
+                : SizedBox(
+                    child: Container(
+                      width: 90,
+                      height: 17,
+                      color: Colors.grey.shade200,
                     ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 23),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Color.fromRGBO(117, 118, 128, 1),
-                    size: 18,
                   ),
-                ),
-              ),
-            ],
+          ],
+        ),
+      ),
+      trailing: Padding(
+        padding: const EdgeInsets.only(bottom: 35),
+        child: IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.arrow_forward_ios,
+            color: Color.fromRGBO(117, 118, 128, 1),
+            size: 18,
           ),
-        ],
+        ),
       ),
     );
   }

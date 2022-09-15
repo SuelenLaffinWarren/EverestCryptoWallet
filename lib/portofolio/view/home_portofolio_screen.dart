@@ -1,11 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:decimal/decimal.dart';
-
-import 'package:everest_card2_listagem/movimentations/movimentations_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'column_principal_portofolio.dart';
-import 'provider/providers.dart';
+import 'package:everest_card2_listagem/movimentations/view/movimentations_screen.dart';
+
+import '../../shared/bottom_navigation/bottom_navigation_page.dart';
+import '../widgtes/column_principal_portofolio.dart';
+import '../provider/providers.dart';
 
 class HomePortofolioScreen extends StatefulHookConsumerWidget {
   const HomePortofolioScreen({Key? key}) : super(key: key);
@@ -29,6 +31,11 @@ class _WalletScreenState extends ConsumerState<HomePortofolioScreen> {
 
   var totalCrypto = btcValue + ethValue + ltcValue;
   var selectedIndex = 0;
+  void _onItemTapped(int value) {
+    setState(() {
+      selectedIndex = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,28 +60,9 @@ class _WalletScreenState extends ConsumerState<HomePortofolioScreen> {
           const MovimentationsScreen()
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Image.asset('assets/images/Warren_False.png'),
-            activeIcon: Image.asset('assets/images/warrenTrue.png'),
-            label: 'Portfólio',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset('assets/images/crypto_false.png'),
-            activeIcon: Image.asset('assets/images/Crypto_True.png'),
-            label: 'Movimentações',
-          ),
-        ],
-        selectedItemColor: Colors.black,
-        currentIndex: selectedIndex,
-        onTap: (index) {
-          setState(
-            () {
-              selectedIndex = index;
-            },
-          );
-        },
+      bottomNavigationBar: BottomNavigationWallet(
+        selectedIndex: selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }

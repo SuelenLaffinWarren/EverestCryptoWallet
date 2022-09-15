@@ -3,8 +3,8 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'widgtes/info_title_wallet_column_screen.dart';
-import 'widgtes/row_list_wallet_screen.dart';
+import 'info_title_wallet_column_screen.dart';
+import 'row_list_wallet_screen.dart';
 
 class ColumnPortofolio extends StatefulHookConsumerWidget {
   const ColumnPortofolio({
