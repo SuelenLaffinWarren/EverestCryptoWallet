@@ -1,8 +1,9 @@
-import 'package:decimal/decimal.dart';
-import 'package:everest_card2_listagem/portfolio/provider/providers.dart';
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:everest_card2_listagem/shared/provider/crypto_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'package:everest_card2_listagem/portfolio/provider/providers.dart';
 
 import '../../dataSource/crypto_datasource.dart';
 import 'info_title_wallet_column_screen.dart';
@@ -12,11 +13,11 @@ class ListViewPrincipalPortfolio extends StatefulHookConsumerWidget {
   const ListViewPrincipalPortfolio({
     Key? key,
     required this.isVisibleState,
-    required this.totalCrypto,
+    // required this.totalAllWallet,
   }) : super(key: key);
 
   final StateController<bool> isVisibleState;
-  final Decimal totalCrypto;
+  //final double totalAllWallet;
 
   @override
   ConsumerState<ListViewPrincipalPortfolio> createState() =>
@@ -27,19 +28,8 @@ class _PortfolioScreenState extends ConsumerState<ListViewPrincipalPortfolio> {
   final getAllCrypto = CryptoDatasource();
   @override
   Widget build(BuildContext context) {
-    // void onTapBitcoin() {
-    //   Navigator.of(context).pushNamed('/bitcoin_details_screen');
-    // }
-
-    // void onTapLtc() {
-    //   Navigator.of(context).pushNamed('/ltc_details_screen');
-    // }
-
-    // void onTapEth() {
-    //   Navigator.of(context).pushNamed('/eth_details_screen');
-    // }
-
     var isVisibleState = ref.watch(stateVisible.state);
+    var allWalletState = ref.watch(totalAllWalletProvider.state);
     final cryptoList = getAllCrypto.getAllCrypto();
 
     return SafeArea(
@@ -48,8 +38,11 @@ class _PortfolioScreenState extends ConsumerState<ListViewPrincipalPortfolio> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
             child: InfoTitleColumnWallet(
-                isVisibleState: widget.isVisibleState.state,
-                totalCrypto: widget.totalCrypto),
+              isVisibleState: isVisibleState.state,
+            ),
+          ),
+          const Divider(
+            thickness: 1,
           ),
           Expanded(
             child: ListView.builder(

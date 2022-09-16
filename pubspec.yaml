@@ -42,6 +42,7 @@ dependencies:
   hooks_riverpod: ^1.0.4
   decimal: ^2.3.0
   page_transition: ^2.0.9
+  fl_chart: ^0.55.1
 
 dev_dependencies:
   flutter_test:
@@ -82,10 +83,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Montserrat
-  #     fonts:
-  #       - asset: assets/fonts/montserrat/static/Montserrat-Bold.ttf
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
           
   #   - family: Source
   #     fonts:

@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:decimal/decimal.dart';
 import 'package:decimal/intl.dart';
+import 'package:everest_card2_listagem/crypto_details/crypto_details_screen.dart';
+import 'package:everest_card2_listagem/shared/provider/crypto_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -15,23 +18,6 @@ class RowCryptoScreen extends StatefulHookConsumerWidget {
     required this.cryptoModel,
   });
 
-  // var value;
-  // String quantityCrypto;
-  // String imageCrypto;
-  // String nameCrypto;
-  // String abrevNameCrypto;
-  // Function() onTapDetails;
-
-  // RowCryptoScreen({
-  //   Key? key,
-  //   required this.value,
-  //   required this.quantityCrypto,
-  //   required this.imageCrypto,
-  //   required this.nameCrypto,
-  //   required this.abrevNameCrypto,
-  //   required this.onTapDetails,
-  // }) : super(key: key);
-
   @override
   ConsumerState<RowCryptoScreen> createState() => _RowCryptoScreenState();
 }
@@ -41,11 +27,24 @@ class _RowCryptoScreenState extends ConsumerState<RowCryptoScreen> {
   Widget build(BuildContext context) {
     @override
     final isVisible = ref.watch(stateVisible.state);
-    // colocar aqui todos os providers que eu criei, depois passa-los no ontap,
-    //colocar eles também ná página de detalhes da crypto
+    CryptoModel cryptoModel = widget.cryptoModel;
+
+    var currentPriceDecimal =
+        Decimal.parse(cryptoModel.currentValueCryptoWallet.toString());
 
     return ListTile(
-      onTap: widget.cryptoModel.onTapDetails,
+      onTap: () {
+        ref.watch(abrvCryptoProvider.state).state = cryptoModel.abrvCrypto;
+        ref.watch(quantityProvider.state).state = cryptoModel.quantity;
+        ref.watch(imagePathProvider.state).state = cryptoModel.imagePath;
+        ref.watch(nameCryptoProvider.state).state = cryptoModel.nameCrypto;
+        ref.watch(currentPriceCryptoProvider.state).state =
+            cryptoModel.currentPriceCrypto;
+        ref.watch(variationCryptoProvider.state).state =
+            cryptoModel.variationCrypto;
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => DetailsCryptoScreen()));
+      },
       horizontalTitleGap: 0,
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(48),
@@ -76,7 +75,7 @@ class _RowCryptoScreenState extends ConsumerState<RowCryptoScreen> {
                     NumberFormat.simpleCurrency(
                             locale: 'pt-BR', decimalDigits: 2)
                         .format(
-                      DecimalIntl(widget.cryptoModel.totalCrypto),
+                      DecimalIntl(currentPriceDecimal),
                     ),
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,

@@ -1,8 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:decimal/decimal.dart';
-import 'package:decimal/intl.dart';
+import 'package:everest_card2_listagem/shared/models/crypto_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
+
+import 'package:everest_card2_listagem/shared/provider/crypto_provider.dart';
 
 import '../provider/providers.dart';
 
@@ -10,11 +13,9 @@ class InfoTitleColumnWallet extends StatefulHookConsumerWidget {
   const InfoTitleColumnWallet({
     Key? key,
     required this.isVisibleState,
-    required this.totalCrypto,
   }) : super(key: key);
 
   final bool isVisibleState;
-  final Decimal totalCrypto;
 
   @override
   ConsumerState<InfoTitleColumnWallet> createState() =>
@@ -24,7 +25,11 @@ class InfoTitleColumnWallet extends StatefulHookConsumerWidget {
 class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
   @override
   Widget build(BuildContext context) {
-    var isVisibleState = ref.watch(visibilityProvider.state);
+    var isVisibleState = ref.watch(stateVisible.state);
+    var totalAllWallet = ref.watch(totalAllWalletProvider.state);
+    //CryptoModel cryptoModel = widget.cryptoModel;
+    // var totalAllWalletDecimal =
+    //     Decimal.parse(cryptoModel.totalAllWallet.toString());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,10 +60,7 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
         ),
         isVisibleState.state
             ? Text(
-                NumberFormat.simpleCurrency(locale: 'pt-BR', decimalDigits: 2)
-                    .format(
-                  DecimalIntl(widget.totalCrypto),
-                ),
+                UtilBrasilFields.obterReal(totalAllWallet.state),
                 style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w700,
