@@ -31,6 +31,7 @@ class _RowCryptoScreenState extends ConsumerState<RowCryptoScreen> {
 
     var currentPriceDecimal =
         Decimal.parse(cryptoModel.currentValueCryptoWallet.toString());
+    var quantityDecimal = cryptoModel.quantity.toStringAsFixed(2);
 
     return ListTile(
       onTap: () {
@@ -42,6 +43,8 @@ class _RowCryptoScreenState extends ConsumerState<RowCryptoScreen> {
             cryptoModel.currentPriceCrypto;
         ref.watch(variationCryptoProvider.state).state =
             cryptoModel.variationCrypto;
+        ref.watch(currentValueCryptoWalletProvider.state).state =
+            cryptoModel.currentValueCryptoWallet;
         Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => DetailsCryptoScreen()));
       },
@@ -110,7 +113,7 @@ class _RowCryptoScreenState extends ConsumerState<RowCryptoScreen> {
             ),
             isVisible.state
                 ? Text(
-                    '${widget.cryptoModel.quantity} ${widget.cryptoModel.abrvCrypto}',
+                    '$quantityDecimal ${widget.cryptoModel.abrvCrypto}',
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,

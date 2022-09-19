@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final totalCryptoProvider = StateProvider((ref) => 00.0);
+final currentValueCryptoWalletProvider = StateProvider((ref) => 00.0);
 final quantityProvider = StateProvider((ref) => 00.0);
 final abrvCryptoProvider = StateProvider((ref) => '');
 final imagePathProvider = StateProvider((ref) => '');

@@ -43,6 +43,7 @@ dependencies:
   decimal: ^2.3.0
   page_transition: ^2.0.9
   fl_chart: ^0.55.1
+  collection: ^1.16.0
 
 dev_dependencies:
   flutter_test:
@@ -86,7 +87,7 @@ flutter:
   fonts:
     - family: Montserrat
       fonts:
-        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
           
   #   - family: Source
   #     fonts:

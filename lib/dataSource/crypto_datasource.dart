@@ -8,11 +8,11 @@ class CryptoDatasource {
         currentPriceCrypto: 100745.00,
         totalAllWallet: 10000,
         currentValueCryptoWallet: 6557.00,
-        quantity: 0.65,
+        quantity: 0.65554321,
         abrvCrypto: 'BTC',
         imagePath: 'assets/images/bitcoin.png',
         nameCrypto: 'Bitcoin',
-        variationCrypto: 0.50,
+        variationCrypto: -0.50,
       ),
       CryptoModel(
         onTapDetails: () {},
