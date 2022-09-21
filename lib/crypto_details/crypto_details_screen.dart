@@ -38,6 +38,12 @@ class DetailsCryptoScreenState extends ConsumerState<DetailsCryptoScreen> {
             style: TextStyle(
                 color: Colors.black, fontSize: 21, fontWeight: FontWeight.w700),
           ),
+          leading: IconButton(
+              onPressed: () {
+                ref.watch(buttonDaysProvider.state).state = 5;
+                Navigator.pushNamed(context, '/portfolio');
+              },
+              icon: const Icon(Icons.arrow_back)),
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           actions: [

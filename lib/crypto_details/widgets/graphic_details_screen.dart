@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:everest_card2_listagem/shared/models/crypto_model.dart';
-import 'package:everest_card2_listagem/shared/provider/crypto_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'package:everest_card2_listagem/shared/models/crypto_model.dart';
+import 'package:everest_card2_listagem/shared/provider/crypto_provider.dart';
 
 class GraphicDetailsScreen extends StatefulHookConsumerWidget {
   const GraphicDetailsScreen({
@@ -17,6 +18,7 @@ class GraphicDetailsScreen extends StatefulHookConsumerWidget {
 }
 
 class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
+  @override
   @override
   Widget build(BuildContext context) {
     final CryptoModel cryptoModel =
@@ -51,6 +53,8 @@ class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
         aspectRatio: 2,
         child: LineChart(
           LineChartData(
+            minY: 0,
+            minX: 0,
             titlesData: FlTitlesData(
               show: false,
             ),

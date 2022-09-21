@@ -11,8 +11,9 @@ final imagePathProvider = StateProvider((ref) => '');
 final nameCryptoProvider = StateProvider((ref) => '');
 final currentPriceCryptoProvider = StateProvider((ref) => 00.0);
 final variationCryptoProvider = StateProvider((ref) => 00.0);
-final buttonDaysProvider = StateProvider((ref) => 1);
+final buttonDaysProvider = StateProvider((ref) => 5);
 final variationCryptoButtonProvider = StateProvider((ref) => 0.0);
+final daySelectedCryptoProvider = StateProvider((ref) => 5);
 
 class CriptoNotifier extends StateNotifier<CryptoModel> {
   CriptoNotifier()
