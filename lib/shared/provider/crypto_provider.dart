@@ -1,5 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:decimal/decimal.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
+
+import '../models/crypto_model.dart';
 
 final currentValueCryptoWalletProvider = StateProvider((ref) => 00.0);
 final quantityProvider = StateProvider((ref) => 00.0);
@@ -8,5 +11,63 @@ final imagePathProvider = StateProvider((ref) => '');
 final nameCryptoProvider = StateProvider((ref) => '');
 final currentPriceCryptoProvider = StateProvider((ref) => 00.0);
 final variationCryptoProvider = StateProvider((ref) => 00.0);
-final totalAllWalletProvider = StateProvider((ref) => 00.0);
-final graphicLoadedProvider = ValueNotifier((ref) => false);
+final buttonDaysProvider = StateProvider((ref) => 1);
+final variationCryptoButtonProvider = StateProvider((ref) => 0.0);
+
+class CriptoNotifier extends StateNotifier<CryptoModel> {
+  CriptoNotifier()
+      : super(
+          CryptoModel(
+            onTapDetails: () {},
+            totalAllWallet: Decimal.parse('1'),
+            quantity: Decimal.parse('1'),
+            abrvCrypto: '',
+            imagePath: '',
+            nameCrypto: '',
+            currentPriceCrypto: Decimal.parse('1'),
+            currentValueCryptoWallet: Decimal.parse('1'),
+            variationCrypto: 0.00,
+            cryptoValuesY: [Decimal.parse('0')],
+          ),
+        );
+  void variationChange(int time) {
+    time = time == 1 ? 2 : time;
+    state.variationCrypto = (DecimalFormatter.decimalFormatter(
+                state.cryptoValuesY.first) /
+            DecimalFormatter.decimalFormatter(state.cryptoValuesY[time - 1]) /
+            -1) /
+        10;
+  }
+}
+
+var cryptoModelProvider = StateNotifierProvider<CriptoNotifier, CryptoModel>(
+  (ref) => CriptoNotifier(),
+);
+var currentPriceProvider = StateNotifierProvider<CurrentPriceNotifier, Decimal>(
+  (ref) => CurrentPriceNotifier(),
+);
+
+class CurrentPriceNotifier extends StateNotifier<Decimal> {
+  CurrentPriceNotifier() : super(Decimal.parse('0'));
+
+  void getActualValueCrypto(int days, CryptoModel cripto) {
+    state = (cripto.cryptoValuesY[days - 1]);
+  }
+}
+
+class DecimalFormatter {
+  static double decimalFormatter(Decimal number) {
+    return double.parse(number.toString());
+  }
+}
+
+class FormatValueNumber {
+  static String format(Decimal price) {
+    return NumberFormat.simpleCurrency(locale: 'pt-BR')
+        .format(price.toDouble());
+  }
+
+  static String formatDouble(double price) {
+    return NumberFormat.simpleCurrency(locale: 'pt-BR').format(price);
+  }
+}

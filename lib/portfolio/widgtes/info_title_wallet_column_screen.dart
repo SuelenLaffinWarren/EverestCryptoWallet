@@ -1,21 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:decimal/decimal.dart';
-import 'package:everest_card2_listagem/shared/models/crypto_model.dart';
+import 'package:everest_card2_listagem/shared/dataSource/crypto_datasource.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:everest_card2_listagem/shared/provider/crypto_provider.dart';
 
-import '../provider/providers.dart';
+import '../provider/isVisible_provider.dart';
 
 class InfoTitleColumnWallet extends StatefulHookConsumerWidget {
   const InfoTitleColumnWallet({
     Key? key,
-    required this.isVisibleState,
   }) : super(key: key);
-
-  final bool isVisibleState;
 
   @override
   ConsumerState<InfoTitleColumnWallet> createState() =>
@@ -26,10 +22,15 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
   @override
   Widget build(BuildContext context) {
     var isVisibleState = ref.watch(stateVisible.state);
-    var totalAllWallet = ref.watch(totalAllWalletProvider.state);
-    //CryptoModel cryptoModel = widget.cryptoModel;
-    // var totalAllWalletDecimal =
-    //     Decimal.parse(cryptoModel.totalAllWallet.toString());
+    final cryptoList = ref.read(cryptoListDataSourceProvider);
+
+    Decimal totalAllWallet() {
+      Decimal totalAllWallet = Decimal.parse('0');
+      for (int index = 0; index < cryptoList.length; index++) {
+        totalAllWallet += cryptoList[index].totalAllWallet;
+      }
+      return totalAllWallet;
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +61,7 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
         ),
         isVisibleState.state
             ? Text(
-                UtilBrasilFields.obterReal(totalAllWallet.state),
+                FormatValueNumber.format(totalAllWallet()),
                 style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.w700,

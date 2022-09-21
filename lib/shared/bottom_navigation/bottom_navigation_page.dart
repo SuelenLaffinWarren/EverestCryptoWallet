@@ -15,12 +15,12 @@ class BottomNavigationWallet extends StatelessWidget {
         case 0:
           Navigator.pushNamed(
             context,
-            '/home_portfolio_screen',
+            '/portfolio',
           );
 
           break;
         case 1:
-          Navigator.pushNamed(context, '/movimentations_screen');
+          Navigator.pushNamed(context, '/movimentations');
           break;
       }
     }

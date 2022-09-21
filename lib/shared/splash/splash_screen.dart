@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const route = 'splash';
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
       (value) => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
-            return const HomePortofolioScreen();
+            return const HomePortfolioScreen();
           },
         ),
       ),

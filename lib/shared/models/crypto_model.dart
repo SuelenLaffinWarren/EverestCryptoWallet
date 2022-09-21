@@ -1,16 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:decimal/decimal.dart';
 import 'package:flutter/animation.dart';
 
 class CryptoModel {
-  final VoidCallback onTapDetails;
-  final double totalAllWallet;
-  final double quantity;
-  final String abrvCrypto;
-  final String imagePath;
-  final String nameCrypto;
-  final double currentPriceCrypto;
-  final double currentValueCryptoWallet;
-  final double variationCrypto;
+  VoidCallback onTapDetails;
+  Decimal totalAllWallet;
+  Decimal quantity;
+  String abrvCrypto;
+  String imagePath;
+  String nameCrypto;
+  Decimal currentPriceCrypto;
+  Decimal currentValueCryptoWallet;
+  double variationCrypto;
+  List<Decimal> cryptoValuesY;
   CryptoModel({
     required this.onTapDetails,
     required this.totalAllWallet,
@@ -21,5 +23,6 @@ class CryptoModel {
     required this.currentPriceCrypto,
     required this.currentValueCryptoWallet,
     required this.variationCrypto,
+    required this.cryptoValuesY,
   });
 }

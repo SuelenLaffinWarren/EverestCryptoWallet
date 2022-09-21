@@ -1,20 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:math';
 
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:everest_card2_listagem/crypto_details/utils/providers/crypto_details_providers.dart';
+import '../../shared/provider/crypto_provider.dart';
 
 class ButtonDayGraphic extends StatefulHookConsumerWidget {
-  ButtonDayGraphic({
+  const ButtonDayGraphic({
     Key? key,
     required this.label,
-    required this.days,
+    required this.daysButton,
   }) : super(key: key);
 
-  late double days;
+  final int daysButton;
   final String label;
 
   @override
@@ -22,75 +20,45 @@ class ButtonDayGraphic extends StatefulHookConsumerWidget {
 }
 
 class _ButtonDayGraphicState extends ConsumerState<ButtonDayGraphic> {
-  List<FlSpot> spotsGraphic = [];
-
-  List<FlSpot> listVariation() {
-    if (spotsGraphic.isEmpty) {
-      final List<double> y = [];
-
-      var random = Random();
-      for (var i = 0; i < 90; i++) {
-        y.add(
-            double.parse((random.nextDouble() * 103612.60).toStringAsFixed(2)));
-      }
-      spotsGraphic = y.asMap().entries.map((e) {
-        return FlSpot(e.key.toDouble(), e.value);
-      }).toList();
-    }
-    return spotsGraphic;
-  }
-
-  List<FlSpot> listVariationChangeDays(double days) {
-    List<FlSpot> newSpots = [];
-
-    for (var i = 0; i < days; i++) {
-      newSpots.add(spotsGraphic[i]);
-    }
-
-    return newSpots;
-  }
-
-  FlSpot graphicAtualButtonCrypto() {
-    return spotsGraphic[0];
-  }
-
-  void cleanGraphic() {
-    spotsGraphic = [];
-  }
-
   @override
   Widget build(BuildContext context) {
-    final daySelected = ref.watch(daySelectedProvider);
-    final double buttonDays = ref.watch(buttonDaysProvider);
-    final double cryptoVariation = ref.watch(variationCryptoButtonProvider);
+    final days = ref.watch(buttonDaysProvider.state);
+    final cryptoOne = ref.watch(cryptoModelProvider.notifier).state;
+
     return SizedBox(
-      height: 35,
-      width: 60,
+      height: 30,
+      width: 50,
       child: TextButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
-              widget.days == daySelected ? Colors.grey.shade300 : null),
+              widget.daysButton == days.state
+                  ? const Color.fromRGBO(238, 240, 247, 1)
+                  : null),
         ),
         onPressed: () {
-          listVariationChangeDays(
-              ref.watch(buttonDaysProvider.state).state = widget.days);
-          print(widget.days);
-          if (widget.days / 10 > cryptoVariation) {
-            ref.watch(variationCryptoButtonProvider.state).state =
-                ((widget.days / 10) + cryptoVariation);
-          } else {
-            ref.watch(variationCryptoButtonProvider.state).state =
-                ((widget.days / 10) - cryptoVariation);
-          }
-          setState(() {});
+          setState(() {
+            days.state = widget.daysButton;
+            ref
+                .read(cryptoModelProvider.notifier)
+                .variationChange(widget.daysButton);
+            ref
+                .read(currentPriceProvider.notifier)
+                .getActualValueCrypto(widget.daysButton, cryptoOne);
+            cryptoOne.currentPriceCrypto =
+                ref.read(currentPriceProvider.notifier).state;
+            cryptoOne.variationCrypto =
+                ref.read(cryptoModelProvider.notifier).state.variationCrypto;
+          });
         },
         child: Text(
           widget.label,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.grey.shade800,
+            color: days.state == widget.daysButton
+                ? Colors.black
+                : const Color.fromRGBO(117, 118, 128, 1),
             fontWeight: FontWeight.w800,
-            fontSize: 16,
+            fontSize: 14,
           ),
         ),
       ),

@@ -1,16 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:everest_card2_listagem/shared/provider/crypto_provider.dart';
+import 'package:everest_card2_listagem/portfolio/provider/isVisible_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:everest_card2_listagem/portfolio/provider/providers.dart';
-
-import '../../dataSource/crypto_datasource.dart';
+import '../../shared/dataSource/crypto_datasource.dart';
+import '../../shared/models/crypto_model.dart';
 import 'info_title_wallet_column_screen.dart';
-import 'row_crypto_screen.dart';
+import 'row_crypto_list_screen.dart';
 
-class ListViewPrincipalPortfolio extends StatefulHookConsumerWidget {
-  const ListViewPrincipalPortfolio({
+class ColumnPrincipalPortfolio extends HookConsumerWidget {
+  const ColumnPrincipalPortfolio({
     Key? key,
     required this.isVisibleState,
     // required this.totalAllWallet,
@@ -20,26 +19,17 @@ class ListViewPrincipalPortfolio extends StatefulHookConsumerWidget {
   //final double totalAllWallet;
 
   @override
-  ConsumerState<ListViewPrincipalPortfolio> createState() =>
-      _PortfolioScreenState();
-}
-
-class _PortfolioScreenState extends ConsumerState<ListViewPrincipalPortfolio> {
-  final getAllCrypto = CryptoDatasource();
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var isVisibleState = ref.watch(stateVisible.state);
-    var allWalletState = ref.watch(totalAllWalletProvider.state);
-    final cryptoList = getAllCrypto.getAllCrypto();
+
+    final cryptoList = ref.watch(cryptoListDataSourceProvider);
 
     return SafeArea(
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-            child: InfoTitleColumnWallet(
-              isVisibleState: isVisibleState.state,
-            ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+            child: InfoTitleColumnWallet(),
           ),
           const Divider(
             thickness: 1,
@@ -49,8 +39,9 @@ class _PortfolioScreenState extends ConsumerState<ListViewPrincipalPortfolio> {
               physics: const BouncingScrollPhysics(),
               itemCount: cryptoList.length,
               itemBuilder: (context, index) {
+                CryptoModel crypto = cryptoList[index];
                 return RowCryptoScreen(
-                  cryptoModel: cryptoList[index],
+                  cryptoModel: crypto,
                 );
               },
             ),

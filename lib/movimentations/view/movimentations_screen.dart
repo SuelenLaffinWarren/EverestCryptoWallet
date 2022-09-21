@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../shared/bottom_navigation/bottom_navigation_page.dart';
 
 class MovimentationsScreen extends StatefulWidget {
+  static const route = '/movimentations';
   const MovimentationsScreen({Key? key}) : super(key: key);
 
   @override
