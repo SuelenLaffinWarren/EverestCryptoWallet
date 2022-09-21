@@ -24,7 +24,6 @@ class _ButtonDayGraphicState extends ConsumerState<ButtonDayGraphic> {
   Widget build(BuildContext context) {
     final days = ref.watch(buttonDaysProvider.state);
     final cryptoOne = ref.watch(cryptoModelProvider.notifier).state;
-    final daySelected = ref.watch(daySelectedCryptoProvider.state);
 
     return SizedBox(
       height: 30,
@@ -47,8 +46,6 @@ class _ButtonDayGraphicState extends ConsumerState<ButtonDayGraphic> {
                 .getActualValueCrypto(widget.daysButton, cryptoOne);
             cryptoOne.currentPriceCrypto =
                 ref.read(currentPriceProvider.notifier).state;
-            cryptoOne.variationCrypto =
-                ref.read(cryptoModelProvider.notifier).state.variationCrypto;
           });
         },
         child: Text(

@@ -53,8 +53,8 @@ class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
         aspectRatio: 2,
         child: LineChart(
           LineChartData(
-            minY: 0,
-            minX: 0,
+            minX: days.toDouble() - 1,
+            maxX: 0,
             titlesData: FlTitlesData(
               show: false,
             ),
