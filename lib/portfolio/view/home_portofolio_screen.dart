@@ -15,7 +15,6 @@ class HomePortfolioScreen extends StatefulHookConsumerWidget {
 }
 
 class _WalletScreenState extends ConsumerState<HomePortfolioScreen> {
-  //var totalCrypto = btcValue + ethValue + ltcValue;
   var selectedPage = 0;
 
   @override

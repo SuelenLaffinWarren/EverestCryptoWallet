@@ -34,7 +34,7 @@ class CriptoNotifier extends StateNotifier<CryptoModel> {
   void variationChange(int time) {
     time = time == 1 ? 2 : time;
     state.variationCrypto = (DecimalFormatter.decimalFormatter(
-                state.cryptoValuesY.first) /
+                state.cryptoValuesY.last) /
             DecimalFormatter.decimalFormatter(state.cryptoValuesY[time - 1]) /
             -1) /
         10;
@@ -52,7 +52,7 @@ class CurrentPriceNotifier extends StateNotifier<Decimal> {
   CurrentPriceNotifier() : super(Decimal.parse('0'));
 
   void getActualValueCrypto(int days, CryptoModel cripto) {
-    state = (cripto.cryptoValuesY[days - 1]);
+    state = (cripto.cryptoValuesY[0]);
   }
 }
 

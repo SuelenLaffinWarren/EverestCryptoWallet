@@ -12,11 +12,9 @@ class ColumnPrincipalPortfolio extends HookConsumerWidget {
   const ColumnPrincipalPortfolio({
     Key? key,
     required this.isVisibleState,
-    // required this.totalAllWallet,
   }) : super(key: key);
 
   final StateController<bool> isVisibleState;
-  //final double totalAllWallet;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
