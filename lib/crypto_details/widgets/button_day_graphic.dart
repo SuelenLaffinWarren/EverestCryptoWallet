@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../shared/provider/crypto_provider.dart';
+import '../../portfolio/provider/crypto_provider.dart';
 
 class ButtonDayGraphic extends StatefulHookConsumerWidget {
   const ButtonDayGraphic({
@@ -23,7 +23,7 @@ class _ButtonDayGraphicState extends ConsumerState<ButtonDayGraphic> {
   @override
   Widget build(BuildContext context) {
     final days = ref.watch(buttonDaysProvider.state);
-    final cryptoOne = ref.watch(cryptoModelProvider.notifier).state;
+    final crypto = ref.watch(cryptoModelProvider);
 
     return SizedBox(
       height: 30,
@@ -38,14 +38,11 @@ class _ButtonDayGraphicState extends ConsumerState<ButtonDayGraphic> {
         onPressed: () {
           setState(() {
             days.state = widget.daysButton;
-            ref
-                .read(cryptoModelProvider.notifier)
-                .variationChange(widget.daysButton);
-            ref
-                .read(currentPriceProvider.notifier)
-                .getActualValueCrypto(widget.daysButton, cryptoOne);
-            cryptoOne.currentPriceCrypto =
-                ref.read(currentPriceProvider.notifier).state;
+            ref.watch(currentPriceProvider.notifier);
+
+            ref.read(cryptoModelProvider.notifier).variationChange(
+                  widget.daysButton,
+                );
           });
         },
         child: Text(

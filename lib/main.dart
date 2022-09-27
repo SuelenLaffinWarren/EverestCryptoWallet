@@ -1,4 +1,3 @@
-import 'shared/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,8 +12,8 @@ void main() {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: SplashScreen.route,
-        routes: routesNavigation,
+        initialRoute: '/splash',
+        onGenerateRoute: RoutesApp.generateRoute,
       ),
     ),
   );

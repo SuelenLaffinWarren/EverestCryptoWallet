@@ -1,21 +1,32 @@
-import 'package:everest_card2_listagem/shared/provider/crypto_provider.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+import 'package:brasil_fields/brasil_fields.dart';
+import 'package:everest_card2_listagem/shared/utils/number_formater.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
+
 import '../../portfolio/provider/isVisible_provider.dart';
+import '../../shared/api/model/crypto_view_data.dart';
+import '../providers_details/providers_details.dart';
 import 'graphic_details_screen.dart';
 import 'row_buttons_graphic_days.dart';
 
 class BodyCryptoDetails extends HookConsumerWidget {
   const BodyCryptoDetails({
     Key? key,
+    required this.crypto,
   }) : super(key: key);
+  final CryptoViewData crypto;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cryptoModel = ref.watch(cryptoModelProvider.notifier).state;
+    final cryptoViewData = ref.watch(cryptoProvider);
     final buttonsDay = ref.watch(buttonDaysProvider);
     var isVisibleState = ref.watch(stateVisible.state);
+    final listMarkerData = ref.watch(marketGraphicDataProvider(crypto.name));
+    final priceCurrentGraphic = ref.watch(currentPriceGraphicProvider.state);
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
@@ -32,7 +43,7 @@ class BodyCryptoDetails extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      cryptoModel.nameCrypto,
+                      crypto.name,
                       style: const TextStyle(
                           fontSize: 34, fontWeight: FontWeight.w700),
                     ),
@@ -40,7 +51,7 @@ class BodyCryptoDetails extends HookConsumerWidget {
                       height: 10,
                     ),
                     Text(
-                      cryptoModel.abrvCrypto,
+                      crypto.symbol.toUpperCase(),
                       style: const TextStyle(
                           fontSize: 17,
                           color: Color.fromRGBO(117, 118, 128, 1)),
@@ -49,8 +60,8 @@ class BodyCryptoDetails extends HookConsumerWidget {
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(48),
-                  child: Image.asset(
-                    cryptoModel.imagePath,
+                  child: Image.network(
+                    crypto.image,
                     width: 48,
                     height: 48,
                   ),
@@ -62,7 +73,8 @@ class BodyCryptoDetails extends HookConsumerWidget {
               ? Padding(
                   padding: const EdgeInsets.only(left: 17, top: 10),
                   child: Text(
-                    FormatValueNumber.format(cryptoModel.currentPriceCrypto),
+                    UtilBrasilFields.obterReal(
+                        priceCurrentGraphic.state.toDouble()),
                     style: const TextStyle(
                         fontSize: 32,
                         fontFamily: 'Montserrat',
@@ -77,10 +89,15 @@ class BodyCryptoDetails extends HookConsumerWidget {
                     color: Colors.grey.shade200,
                   ),
                 ),
-          const Padding(
-            padding: EdgeInsets.all(10),
-            child: GraphicDetailsScreen(),
-          ),
+          listMarkerData.when(
+              data: (data) => GraphicDetailsScreen(
+                    crypto: crypto,
+                    listmarketData: data,
+                  ),
+              error: (error, stackTrace) => Center(
+                    child: Text('$error'),
+                  ),
+              loading: () => const CircularProgressIndicator()),
           const Divider(
             thickness: 1,
             indent: 15,
@@ -115,8 +132,7 @@ class BodyCryptoDetails extends HookConsumerWidget {
                         ),
                         isVisibleState.state
                             ? Text(
-                                FormatValueNumber.format(
-                                    cryptoModel.currentPriceCrypto),
+                                numberFormater.format(crypto.current_price),
                                 style: const TextStyle(
                                     color: Color.fromRGBO(47, 47, 51, 1),
                                     fontSize: 19,
@@ -150,11 +166,12 @@ class BodyCryptoDetails extends HookConsumerWidget {
                         ),
                         isVisibleState.state
                             ? Text(
-                                '${cryptoModel.variationCrypto > 0 ? '+' : ''}${cryptoModel.variationCrypto.toStringAsFixed(2)}%',
+                                '${crypto.price_change_percentage_24h > 0 ? '+' : ''}${crypto.price_change_percentage_24h.toStringAsFixed(2)}%',
                                 style: TextStyle(
-                                    color: cryptoModel.variationCrypto < 0
-                                        ? Colors.red
-                                        : Colors.green,
+                                    color:
+                                        crypto.price_change_percentage_24h < 0
+                                            ? Colors.red
+                                            : Colors.green,
                                     fontSize: 19,
                                     fontWeight: FontWeight.w400),
                               )
@@ -186,7 +203,7 @@ class BodyCryptoDetails extends HookConsumerWidget {
                         ),
                         isVisibleState.state
                             ? Text(
-                                '${cryptoModel.quantity} ${cryptoModel.abrvCrypto}',
+                                '${crypto.current_price} ${crypto.symbol.toUpperCase()}',
                                 style: const TextStyle(
                                     color: Color.fromRGBO(47, 47, 51, 1),
                                     fontSize: 19,
@@ -220,8 +237,7 @@ class BodyCryptoDetails extends HookConsumerWidget {
                         ),
                         isVisibleState.state
                             ? Text(
-                                FormatValueNumber.format(
-                                    cryptoModel.currentValueCryptoWallet),
+                                numberFormater.format(crypto.current_price),
                                 style: const TextStyle(
                                     color: Color.fromRGBO(47, 47, 51, 1),
                                     fontSize: 19,
