@@ -1,12 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:decimal/decimal.dart';
+
 class CryptoViewData {
   final String id;
   final String symbol;
   final String name;
   final String image;
   // ignore: non_constant_identifier_names
-  final double current_price;
+  Decimal current_price;
   // ignore: non_constant_identifier_names
   final double price_change_percentage_24h;
 

@@ -1,21 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:decimal/intl.dart';
 import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../shared/total_wallet_model/total_wallet_model.dart';
 import '../provider/isVisible_provider.dart';
 
 class InfoTitleColumnWallet extends StatefulHookConsumerWidget {
-  InfoTitleColumnWallet({
-    required this.totalWalletModel,
+  const InfoTitleColumnWallet({
     Key? key,
   }) : super(key: key);
-  List<TotalWalletModel> totalWalletModel;
 
   @override
   ConsumerState<InfoTitleColumnWallet> createState() =>
@@ -28,11 +24,6 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
     var isVisibleState = ref.watch(stateVisible.state);
     final cryptoList = ref.watch(cryptoModelProvider);
     final totalValueCrypto = ref.watch(totalUseCaseProvider);
-
-    String getTotalWallet() {
-      final String totalBalance = UtilBrasilFields.obterReal(100000);
-      return totalBalance;
-    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +55,7 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
         isVisibleState.state
             ? FutureBuilder(
                 future: ref.watch(
-                    getTotalProvider(ref.watch(UserTotalProvider)).future),
+                    getTotalProvider(ref.watch(userTotalProvider)).future),
                 builder: ((context, snapshot) {
                   if (snapshot.hasData) {
                     return Text(

@@ -1,21 +1,17 @@
 import 'package:decimal/decimal.dart';
-import 'package:everest_card2_listagem/shared/api/useCase/total_crypto_value_use_case.dart';
+import 'package:everest_card2_listagem/portfolio/useCase/total_crypto_value_use_case.dart';
 import '../../shared/api/repository/repository_provider.dart';
-import '../../shared/api/useCase/crypto_use_case.dart';
+import '../useCase/crypto_use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../shared/api/model/crypto_view_data.dart';
-
-final buttonDaysProvider = StateProvider((ref) => 5);
-final variationCryptoButtonProvider = StateProvider((ref) => 0.0);
-final daySelectedCryptoProvider = StateProvider((ref) => 5.00);
+import '../model/crypto_view_data.dart';
 
 class CriptoNotifier extends StateNotifier<CryptoViewData> {
   CriptoNotifier()
       : super(
           CryptoViewData(
-            current_price: 0.00,
+            current_price: Decimal.parse('0'),
             id: '',
             image: '',
             name: '',
@@ -82,5 +78,5 @@ final totalUseCaseProvider = StateProvider((ref) =>
 final getTotalProvider = FutureProvider.family<Decimal, List<double>>(
     (ref, args) => ref.watch(totalUseCaseProvider).totalMoney(args));
 
-final UserTotalProvider =
+final userTotalProvider =
     Provider((ref) => [0.78, 1.54, 3.45, 0.52, 0.45, 1.75]);

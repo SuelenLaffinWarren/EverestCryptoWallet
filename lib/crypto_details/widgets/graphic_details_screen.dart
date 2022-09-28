@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:decimal/decimal.dart';
-import 'package:everest_card2_listagem/shared/api/model/crypto_view_data.dart';
-import 'package:everest_card2_listagem/shared/api/model/market_graphic_view_data.dart';
+import 'package:everest_card2_listagem/portfolio/model/crypto_view_data.dart';
+import 'package:everest_card2_listagem/crypto_details/model/market_graphic_view_data.dart';
 import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +104,7 @@ class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
                 }).toList();
               },
               touchTooltipData: LineTouchTooltipData(
-                tooltipBgColor: const Color.fromRGBO(224, 43, 87, 1),
+                tooltipBgColor: const Color.fromARGB(255, 6, 6, 6),
                 tooltipRoundedRadius: 20,
                 getTooltipItems: (touchedSpots) {
                   return touchedSpots.map(

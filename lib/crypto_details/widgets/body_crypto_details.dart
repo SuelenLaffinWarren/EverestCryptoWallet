@@ -1,14 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:everest_card2_listagem/shared/utils/number_formater.dart';
+import 'package:decimal/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
+import 'package:intl/intl.dart';
 
 import '../../portfolio/provider/isVisible_provider.dart';
-import '../../shared/api/model/crypto_view_data.dart';
+import '../../portfolio/model/crypto_view_data.dart';
 import '../providers_details/providers_details.dart';
 import 'graphic_details_screen.dart';
 import 'row_buttons_graphic_days.dart';
@@ -22,8 +23,6 @@ class BodyCryptoDetails extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cryptoViewData = ref.watch(cryptoProvider);
-    final buttonsDay = ref.watch(buttonDaysProvider);
     var isVisibleState = ref.watch(stateVisible.state);
     final listMarkerData = ref.watch(marketGraphicDataProvider(crypto.name));
     final priceCurrentGraphic = ref.watch(currentPriceGraphicProvider.state);
@@ -73,8 +72,7 @@ class BodyCryptoDetails extends HookConsumerWidget {
               ? Padding(
                   padding: const EdgeInsets.only(left: 17, top: 10),
                   child: Text(
-                    UtilBrasilFields.obterReal(
-                        priceCurrentGraphic.state.toDouble()),
+                    UtilBrasilFields.obterReal(crypto.current_price.toDouble()),
                     style: const TextStyle(
                         fontSize: 32,
                         fontFamily: 'Montserrat',
@@ -132,7 +130,9 @@ class BodyCryptoDetails extends HookConsumerWidget {
                         ),
                         isVisibleState.state
                             ? Text(
-                                numberFormater.format(crypto.current_price),
+                                NumberFormat.simpleCurrency(
+                                        locale: 'pt-BR', decimalDigits: 2)
+                                    .format(DecimalIntl(crypto.current_price)),
                                 style: const TextStyle(
                                     color: Color.fromRGBO(47, 47, 51, 1),
                                     fontSize: 19,
@@ -237,7 +237,9 @@ class BodyCryptoDetails extends HookConsumerWidget {
                         ),
                         isVisibleState.state
                             ? Text(
-                                numberFormater.format(crypto.current_price),
+                                NumberFormat.simpleCurrency(
+                                        locale: 'pt-BR', decimalDigits: 2)
+                                    .format(DecimalIntl(crypto.current_price)),
                                 style: const TextStyle(
                                     color: Color.fromRGBO(47, 47, 51, 1),
                                     fontSize: 19,

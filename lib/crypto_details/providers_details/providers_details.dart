@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../shared/api/model/market_graphic_view_data.dart';
+import '../model/market_graphic_view_data.dart';
 import '../../shared/api/repository/repository_provider.dart';
-import '../../shared/api/useCase/market_use_case.dart';
+import '../useCase/market_use_case.dart';
 
 final getMarketChartDataProvider = Provider((ref) {
   return MarketUseCase(
@@ -16,3 +16,7 @@ final marketGraphicDataProvider =
     return await ref.read(getMarketChartDataProvider).execute(crypto);
   }),
 );
+
+final buttonDaysProvider = StateProvider((ref) => 5);
+final variationCryptoButtonProvider = StateProvider((ref) => 0.0);
+final daySelectedCryptoProvider = StateProvider((ref) => 5.00);

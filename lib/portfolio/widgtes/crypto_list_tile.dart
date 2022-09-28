@@ -1,11 +1,11 @@
+import 'package:decimal/intl.dart';
 import 'package:everest_card2_listagem/crypto_details/crypto_details_screen.dart';
 import 'package:everest_card2_listagem/shared/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../shared/api/model/crypto_view_data.dart';
-import '../../shared/utils/number_formater.dart';
+import '../model/crypto_view_data.dart';
 
 class CryptoListTile extends HookConsumerWidget {
   const CryptoListTile({
@@ -54,7 +54,9 @@ class CryptoListTile extends HookConsumerWidget {
             ),
             isVisible.state
                 ? Text(
-                    numberFormater.format(crypto.current_price),
+                    NumberFormat.simpleCurrency(
+                            locale: 'pt-BR', decimalDigits: 2)
+                        .format(DecimalIntl(crypto.current_price)),
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 19,
