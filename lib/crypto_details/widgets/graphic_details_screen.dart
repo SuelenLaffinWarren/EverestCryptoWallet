@@ -1,19 +1,24 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:decimal/decimal.dart';
-import 'package:everest_card2_listagem/portfolio/model/crypto_view_data.dart';
 import 'package:everest_card2_listagem/crypto_details/model/market_graphic_view_data.dart';
+import 'package:everest_card2_listagem/crypto_details/providers_details/providers_details.dart';
+import 'package:everest_card2_listagem/portfolio/model/crypto_view_data.dart';
 import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class GraphicDetailsScreen extends StatefulHookConsumerWidget {
-  GraphicDetailsScreen(
-      {Key? key, required this.listmarketData, required this.crypto})
-      : super(key: key);
-  MarketGraphicViewData listmarketData;
+  GraphicDetailsScreen({
+    Key? key,
+    required this.crypto,
+    required this.listMarketData,
+  }) : super(key: key);
+
   CryptoViewData crypto;
+
+  MarketGraphicViewData listMarketData;
 
   @override
   ConsumerState<GraphicDetailsScreen> createState() =>
@@ -23,26 +28,8 @@ class GraphicDetailsScreen extends StatefulHookConsumerWidget {
 class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    List<FlSpot> listSpots = [];
-
-    List<FlSpot> getSpotsList() {
-      for (int i = 0; i < widget.listmarketData.values.length; i++) {
-        listSpots.add(
-          FlSpot(
-            i.toDouble(),
-            widget.listmarketData.values[i].toDouble(),
-          ),
-        );
-      }
-
-      return listSpots;
-    }
-
-    @override
-    void initState() {
-      getSpotsList();
-      super.initState();
-    }
+    List<List<num>> listSpots = widget.listMarketData.values;
+    int graphicDay = listSpots.length - 1 - ref.watch(buttonDaysProvider);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -52,6 +39,15 @@ class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
           LineChartData(
             titlesData: FlTitlesData(
               show: false,
+              topTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              leftTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              rightTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
             ),
             borderData: FlBorderData(
               show: true,
@@ -64,7 +60,11 @@ class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
             clipData: FlClipData.all(),
             lineBarsData: [
               LineChartBarData(
-                spots: getSpotsList(),
+                spots: listSpots
+                    .sublist(graphicDay)
+                    .map((crypto) =>
+                        FlSpot(crypto[0].toDouble(), crypto[1].toDouble()))
+                    .toList(),
                 dotData: FlDotData(show: false),
                 isCurved: false,
                 color: Colors.pink,
@@ -82,7 +82,7 @@ class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
                 if (!event.isInterestedForInteractions ||
                     lineTouch == null ||
                     lineTouch.lineBarSpots == null) {
-                  ref.read(currentPriceGraphicProvider.state).state =
+                  ref.read(currentPriceGraphicProvider.notifier).state =
                       Decimal.parse('${widget.crypto.current_price}');
                 } else {
                   ref.read(currentPriceGraphicProvider.state).state =

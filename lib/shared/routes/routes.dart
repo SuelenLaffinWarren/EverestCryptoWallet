@@ -1,7 +1,7 @@
 import 'package:everest_card2_listagem/shared/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../crypto_details/crypto_details_screen.dart';
+import '../../crypto_details/view/crypto_details_screen.dart';
 import '../../movimentations/view/movimentations_screen.dart';
 import '../../portfolio/view/home_portofolio_screen.dart';
 import '../../portfolio/model/crypto_view_data.dart';

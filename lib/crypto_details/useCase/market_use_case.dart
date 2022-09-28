@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:everest_card2_listagem/crypto_details/mapper/market_mapper.dart';
-import 'package:everest_card2_listagem/crypto_details/model/market_graphic_view_data.dart';
-import 'package:everest_card2_listagem/shared/api/repository/market_graphic_repository.dart';
+
+import '../../shared/api/repository/market_graphic_repository.dart';
+import '../model/market_graphic_view_data.dart';
 
 class MarketUseCase {
   final MarketGraphicRepository repository;

@@ -10,7 +10,7 @@ class CryptoViewData {
   // ignore: non_constant_identifier_names
   Decimal current_price;
   // ignore: non_constant_identifier_names
-  final double price_change_percentage_24h;
+  double price_change_percentage_24h;
 
   CryptoViewData({
     required this.id,

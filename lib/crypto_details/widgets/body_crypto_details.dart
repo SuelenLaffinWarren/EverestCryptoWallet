@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:decimal/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -72,7 +71,9 @@ class BodyCryptoDetails extends HookConsumerWidget {
               ? Padding(
                   padding: const EdgeInsets.only(left: 17, top: 10),
                   child: Text(
-                    UtilBrasilFields.obterReal(crypto.current_price.toDouble()),
+                    NumberFormat.simpleCurrency(
+                            locale: 'pt-BR', decimalDigits: 2)
+                        .format(DecimalIntl(priceCurrentGraphic.state)),
                     style: const TextStyle(
                         fontSize: 32,
                         fontFamily: 'Montserrat',
@@ -90,7 +91,7 @@ class BodyCryptoDetails extends HookConsumerWidget {
           listMarkerData.when(
               data: (data) => GraphicDetailsScreen(
                     crypto: crypto,
-                    listmarketData: data,
+                    listMarketData: data,
                   ),
               error: (error, stackTrace) => Center(
                     child: Text('$error'),
@@ -203,7 +204,7 @@ class BodyCryptoDetails extends HookConsumerWidget {
                         ),
                         isVisibleState.state
                             ? Text(
-                                '${crypto.current_price} ${crypto.symbol.toUpperCase()}',
+                                '${crypto.current_price.toDouble()} ${crypto.symbol.toUpperCase()}',
                                 style: const TextStyle(
                                     color: Color.fromRGBO(47, 47, 51, 1),
                                     fontSize: 19,

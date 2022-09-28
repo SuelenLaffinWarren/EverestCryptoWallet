@@ -6,8 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:everest_card2_listagem/portfolio/model/crypto_view_data.dart';
 
-import '../portfolio/provider/isVisible_provider.dart';
-import 'widgets/body_crypto_details.dart';
+import '../../portfolio/provider/isVisible_provider.dart';
+import '../widgets/body_crypto_details.dart';
 
 class DetailsCryptoScreen extends StatefulHookConsumerWidget {
   static const route = '/details_crypto_screen';
@@ -37,7 +37,7 @@ class DetailsCryptoScreenState extends ConsumerState<DetailsCryptoScreen> {
           ),
           leading: IconButton(
               onPressed: () {
-                ref.watch(buttonDaysProvider.state).state = 5;
+                ref.watch(buttonDaysProvider.state).state;
                 Navigator.pushNamed(context, '/portfolio');
               },
               icon: const Icon(Icons.arrow_back)),

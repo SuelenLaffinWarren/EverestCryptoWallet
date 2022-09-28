@@ -7,13 +7,15 @@ part of 'market_graphic_response.dart';
 // **************************************************************************
 
 MarketGraphicResponse _$MarketGraphicResponseFromJson(
-        Map<dynamic, dynamic> json) =>
+        Map<String, dynamic> json) =>
     MarketGraphicResponse(
-      prices: json['prices'],
+      (json['prices'] as List<dynamic>)
+          .map((e) => (e as List<dynamic>).map((e) => e as num).toList())
+          .toList(),
     );
 
-Map<dynamic, dynamic> _$MarketGraphicResponseToJson(
+Map<String, dynamic> _$MarketGraphicResponseToJson(
         MarketGraphicResponse instance) =>
-    <dynamic, dynamic>{
+    <String, dynamic>{
       'values': instance.prices,
     };

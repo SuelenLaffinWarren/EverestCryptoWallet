@@ -1,5 +1,5 @@
 import 'package:decimal/intl.dart';
-import 'package:everest_card2_listagem/crypto_details/crypto_details_screen.dart';
+import 'package:everest_card2_listagem/crypto_details/view/crypto_details_screen.dart';
 import 'package:everest_card2_listagem/shared/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

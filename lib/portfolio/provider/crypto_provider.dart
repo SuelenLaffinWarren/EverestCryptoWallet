@@ -1,4 +1,5 @@
 import 'package:decimal/decimal.dart';
+import 'package:everest_card2_listagem/crypto_details/model/market_graphic_view_data.dart';
 import 'package:everest_card2_listagem/portfolio/useCase/total_crypto_value_use_case.dart';
 import '../../shared/api/repository/repository_provider.dart';
 import '../useCase/crypto_use_case.dart';
@@ -35,8 +36,8 @@ var currentPriceProvider = StateNotifierProvider<CurrentPriceNotifier, Decimal>(
 class CurrentPriceNotifier extends StateNotifier<Decimal> {
   CurrentPriceNotifier() : super(Decimal.parse('0'));
 
-  void getActualValueCrypto(int days, CryptoViewData crypto) {
-    state = Decimal.parse('${crypto.current_price}');
+  void getActualValueCrypto(int days, MarketGraphicViewData market) {
+    state = Decimal.parse('${market.values[days - 1]}');
   }
 }
 

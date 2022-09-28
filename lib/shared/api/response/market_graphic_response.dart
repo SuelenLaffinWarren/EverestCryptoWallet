@@ -1,17 +1,16 @@
-import 'package:decimal/decimal.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'market_graphic_response.g.dart';
 
 @JsonSerializable()
 class MarketGraphicResponse {
-  final List<Decimal> prices;
-  MarketGraphicResponse({
-    required this.prices,
-  });
+  final List<List<num>> prices;
+  MarketGraphicResponse(
+    this.prices,
+  );
 
-  factory MarketGraphicResponse.fromJson(Map<dynamic, dynamic> json) =>
+  factory MarketGraphicResponse.fromJson(Map<String, dynamic> json) =>
       _$MarketGraphicResponseFromJson(json);
 
-  Map<dynamic, dynamic> toJson() => _$MarketGraphicResponseToJson(this);
+  Map<String, dynamic> toJson() => _$MarketGraphicResponseToJson(this);
 }
