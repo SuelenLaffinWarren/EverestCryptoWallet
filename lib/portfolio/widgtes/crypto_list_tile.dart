@@ -62,12 +62,10 @@ class CryptoListTile extends HookConsumerWidget {
                       fontSize: 19,
                     ),
                   )
-                : SizedBox(
-                    child: Container(
-                      width: 110,
-                      height: 20,
-                      color: Colors.grey.shade200,
-                    ),
+                : Container(
+                    width: 110,
+                    height: 20,
+                    color: Colors.grey.shade200,
                   ),
           ],
         ),
@@ -97,12 +95,10 @@ class CryptoListTile extends HookConsumerWidget {
                       color: Color.fromRGBO(117, 118, 128, 1),
                     ),
                   )
-                : SizedBox(
-                    child: Container(
-                      width: 90,
-                      height: 17,
-                      color: Colors.grey.shade200,
-                    ),
+                : Container(
+                    width: 90,
+                    height: 17,
+                    color: Colors.grey.shade200,
                   ),
           ],
         ),
