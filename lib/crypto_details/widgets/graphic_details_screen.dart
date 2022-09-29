@@ -74,7 +74,6 @@ class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
                 ),
               )
             ],
-            betweenBarsData: [],
             extraLinesData: ExtraLinesData(),
             lineTouchData: LineTouchData(
               touchCallback:
