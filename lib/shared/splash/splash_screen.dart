@@ -1,9 +1,11 @@
-import '../../portfolio/view/home_portofolio_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../portfolio/view/home_portofolio_screen.dart';
+import '../../portfolio/widgtes/crypto_list_view.dart';
+
 class SplashScreen extends StatefulWidget {
-  static const route = 'splash';
+  static const route = '/splash';
   const SplashScreen({Key? key}) : super(key: key);
 
   @override

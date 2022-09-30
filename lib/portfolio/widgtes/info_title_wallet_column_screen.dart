@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:decimal/decimal.dart';
-import 'package:everest_card2_listagem/shared/dataSource/crypto_datasource.dart';
+
+import 'package:decimal/intl.dart';
+import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'package:everest_card2_listagem/shared/provider/crypto_provider.dart';
+import 'package:intl/intl.dart';
 
 import '../provider/isVisible_provider.dart';
 
@@ -22,15 +22,8 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
   @override
   Widget build(BuildContext context) {
     var isVisibleState = ref.watch(stateVisible.state);
-    final cryptoList = ref.read(cryptoListDataSourceProvider);
-
-    Decimal totalAllWallet() {
-      Decimal totalAllWallet = Decimal.parse('0');
-      for (int index = 0; index < cryptoList.length; index++) {
-        totalAllWallet += cryptoList[index].totalAllWallet;
-      }
-      return totalAllWallet;
-    }
+    final cryptoList = ref.watch(cryptoModelProvider);
+    final totalValueCrypto = ref.watch(totalUseCaseProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,12 +53,23 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
           ],
         ),
         isVisibleState.state
-            ? Text(
-                FormatValueNumber.format(totalAllWallet()),
-                style: const TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w700,
-                ),
+            ? FutureBuilder(
+                future: ref.watch(
+                    getTotalProvider(ref.watch(userTotalProvider)).future),
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      NumberFormat.simpleCurrency(
+                              locale: 'pt-BR', decimalDigits: 2)
+                          .format(DecimalIntl(snapshot.data!)),
+                      style: const TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    );
+                  }
+                  return const CircularProgressIndicator();
+                }),
               )
             : SizedBox(
                 child: Container(

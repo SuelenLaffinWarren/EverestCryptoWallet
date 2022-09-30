@@ -45,6 +45,9 @@ dependencies:
   fl_chart: ^0.55.1
   collection: ^1.16.0
   currency_formatter: ^2.0.0
+  dio: ^4.0.6
+  json_serializable: ^6.4.0
+  build_runner: ^2.2.1
 
 dev_dependencies:
   flutter_test:
@@ -98,3 +101,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  generate: false
