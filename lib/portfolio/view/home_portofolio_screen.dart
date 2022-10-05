@@ -1,4 +1,4 @@
-import 'package:everest_card2_listagem/portfolio/widgtes/info_title_wallet_column_screen.dart';
+import '../widgtes/info_title_wallet_column_screen.dart';
 
 import '../widgtes/crypto_list_view.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +22,12 @@ class _WalletScreenState extends ConsumerState<HomePortfolioScreen> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: [
+          children: const [
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(12.0),
               child: InfoTitleColumnWallet(),
             ),
-            const HomePortfolioColumn(),
+            CryptoListView(),
           ],
         ),
       ),

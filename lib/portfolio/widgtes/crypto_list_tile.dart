@@ -1,10 +1,11 @@
+import 'package:decimal/decimal.dart';
 import 'package:decimal/intl.dart';
-import 'package:everest_card2_listagem/crypto_details/view/crypto_details_screen.dart';
-import 'package:everest_card2_listagem/shared/routes/routes.dart';
+import '../../crypto_details/view/crypto_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../shared/utils/arguments.dart';
 import '../model/crypto_view_data.dart';
 
 class CryptoListTile extends HookConsumerWidget {
@@ -12,20 +13,23 @@ class CryptoListTile extends HookConsumerWidget {
     Key? key,
     required this.crypto,
     required this.isVisible,
+    required this.userCryptoValue,
   }) : super(key: key);
 
   final CryptoViewData crypto;
+  final Decimal userCryptoValue;
 
   final StateController<bool> isVisible;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final format = NumberFormat("#,##0.00", "pt");
-
     return ListTile(
       onTap: () {
         Navigator.of(context).pushNamed(DetailsCryptoScreen.route,
-            arguments: Arguments(cryptoData: crypto));
+            arguments: Arguments(
+              cryptoData: crypto,
+              userCryptoValue: userCryptoValue,
+            ));
       },
       horizontalTitleGap: 0,
       leading: ClipRRect(
@@ -56,16 +60,24 @@ class CryptoListTile extends HookConsumerWidget {
                 ? Text(
                     NumberFormat.simpleCurrency(
                             locale: 'pt-BR', decimalDigits: 2)
-                        .format(DecimalIntl(crypto.current_price)),
+                        .format(
+                      DecimalIntl(
+                        Decimal.parse(
+                          crypto.userValueMoney(userCryptoValue).toString(),
+                        ),
+                      ),
+                    ),
                     style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 19,
                     ),
                   )
-                : Container(
-                    width: 110,
-                    height: 20,
-                    color: Colors.grey.shade200,
+                : SizedBox(
+                    child: Container(
+                      width: 110,
+                      height: 20,
+                      color: Colors.grey.shade200,
+                    ),
                   ),
           ],
         ),
@@ -88,17 +100,19 @@ class CryptoListTile extends HookConsumerWidget {
             ),
             isVisible.state
                 ? Text(
-                    '${crypto.current_price} ${crypto.symbol.toUpperCase()}',
+                    '$userCryptoValue ${crypto.symbol.toUpperCase()}',
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
                       color: Color.fromRGBO(117, 118, 128, 1),
                     ),
                   )
-                : Container(
-                    width: 90,
-                    height: 17,
-                    color: Colors.grey.shade200,
+                : SizedBox(
+                    child: Container(
+                      width: 90,
+                      height: 17,
+                      color: Colors.grey.shade200,
+                    ),
                   ),
           ],
         ),

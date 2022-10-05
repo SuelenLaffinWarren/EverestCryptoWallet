@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:decimal/decimal.dart';
 import 'package:everest_card2_listagem/portfolio/provider/isVisible_provider.dart';
 import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:flutter/material.dart';
@@ -6,17 +7,16 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'crypto_list_tile.dart';
 
-class HomePortfolioColumn extends StatefulHookConsumerWidget {
-  const HomePortfolioColumn({
+class CryptoListView extends StatefulHookConsumerWidget {
+  const CryptoListView({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState<HomePortfolioColumn> createState() =>
-      HomePortfolioColumnState();
+  ConsumerState<CryptoListView> createState() => CryptoListViewState();
 }
 
-class HomePortfolioColumnState extends ConsumerState<HomePortfolioColumn> {
+class CryptoListViewState extends ConsumerState<CryptoListView> {
   @override
   Widget build(BuildContext context) {
     final cryptoViewData = ref.watch(cryptoProvider);
@@ -28,9 +28,9 @@ class HomePortfolioColumnState extends ConsumerState<HomePortfolioColumn> {
             flex: 1,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: data.length,
+              itemCount: data.cryptoListViewData.length,
               itemBuilder: (context, index) {
-                final crypto = data[index];
+                final crypto = data.cryptoListViewData[index];
 
                 return Column(
                   children: [
@@ -41,6 +41,9 @@ class HomePortfolioColumnState extends ConsumerState<HomePortfolioColumn> {
                       child: CryptoListTile(
                         crypto: crypto,
                         isVisible: isVisible,
+                        userCryptoValue: Decimal.parse(
+                          ref.watch(userTotalProvider)[index].toString(),
+                        ),
                       ),
                     ),
                   ],
