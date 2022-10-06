@@ -17,8 +17,7 @@ final conversionProvider = StateProvider<CryptoViewData>(
 
 var conversionPriceProvider = StateProvider((ref) => 0.0);
 var boolConversionProvider = StateProvider<bool>((ref) => false);
-// var selectCryptoProvider = FutureProvider<CryptoViewData>((ref) async =>
-//     ref.read(allCryptoListProvider).value!.cryptoListViewData.first);
+
 var cryptoSymbolProvider = StateProvider((ref) => '');
 var textFieldControllerProvider =
     StateProvider((ref) => TextEditingController());
