@@ -1,6 +1,7 @@
 import 'package:everest_card2_listagem/conversion/provider/conversion_provider.dart';
 import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
-import 'package:everest_card2_listagem/revision/widgets/app_bar_revision.dart';
+import 'package:everest_card2_listagem/shared/template/app_bar.dart';
+
 import 'package:everest_card2_listagem/shared/utils/arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -26,7 +27,7 @@ class _RevisionScreenState extends ConsumerState<RevisionScreen> {
     return cryptoData.when(
       data: (data) {
         return Scaffold(
-          appBar: const AppBarRevision(),
+          appBar: AppBarTemplate(title: 'Revisar'),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
