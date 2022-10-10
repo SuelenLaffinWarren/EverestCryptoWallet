@@ -1,3 +1,5 @@
+import 'package:everest_card2_listagem/revision/view/revision_screen.dart';
+import 'package:everest_card2_listagem/success/view/sucess_conversion_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../conversion/view/conversion_screen.dart';
@@ -12,30 +14,126 @@ class RoutesApp {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case HomePortfolioScreen.route:
-        return MaterialPageRoute(builder: (_) {
-          return const HomePortfolioScreen();
-        });
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const HomePortfolioScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.linear;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        );
+
       case MovimentationsScreen.route:
-        return MaterialPageRoute(builder: (_) => const MovimentationsScreen());
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const MovimentationsScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.linear;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        );
       case ConversionScreen.route:
-        return MaterialPageRoute(builder: (context) {
-          final args = settings.arguments as Arguments;
-          return ConversionScreen(
+        final args = settings.arguments as Arguments;
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              ConversionScreen(
             args: args,
-          );
-        });
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.linear;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        );
+      case RevisionScreen.route:
+        final args = settings.arguments as Arguments;
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              RevisionScreen(
+            args: args,
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.linear;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        );
+      case SucessConversionScreen.route:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const SucessConversionScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        );
       case SplashScreen.route:
         return MaterialPageRoute(builder: (_) {
           return const SplashScreen();
         });
       case DetailsCryptoScreen.route:
-        return MaterialPageRoute(
-          builder: (context) {
-            final args = settings.arguments as Arguments;
+        final args = settings.arguments as Arguments;
 
-            return DetailsCryptoScreen(
-              crypto: args.cryptoData,
-              userValue: args.userCryptoValue,
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              DetailsCryptoScreen(
+            crypto: args.cryptoData,
+            userValue: args.userCryptoValue,
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.linear;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
             );
           },
         );

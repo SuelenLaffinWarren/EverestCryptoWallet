@@ -19,7 +19,7 @@ class CryptoListView extends StatefulHookConsumerWidget {
 class CryptoListViewState extends ConsumerState<CryptoListView> {
   @override
   Widget build(BuildContext context) {
-    final cryptoViewData = ref.watch(cryptoProvider);
+    final cryptoViewData = ref.watch(cryptoListProvider);
     final isVisible = ref.watch(stateVisible.state);
 
     return cryptoViewData.when(
