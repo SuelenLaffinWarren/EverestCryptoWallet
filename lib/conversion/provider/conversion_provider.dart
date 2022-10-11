@@ -21,7 +21,8 @@ var conversionPriceProvider = StateProvider((ref) => Decimal.parse('0'));
 var boolConversionProvider = StateProvider<bool>((ref) => false);
 
 var totalEstimatedProvider = StateProvider((ref) => 0.00);
-var cambioCryptoProvider = StateProvider((ref) => 0.00);
+
+var cryptoSymbolProvider = StateProvider((ref) => '');
 
 var textFieldControllerProvider =
     StateProvider((ref) => TextEditingController());
@@ -29,3 +30,8 @@ var textFieldControllerProvider =
 final secondSelectedCryptoProvider = StateProvider<CryptoViewData>((ref) {
   return ref.read(cryptoListProvider).value!.cryptoListViewData.last;
 });
+
+final dateNowProvider = StateProvider((ref) => DateTime.now());
+
+final firstSymbolProvider =
+    StateProvider<CryptoViewData>((ref) => ref.read(cryptoModelProvider));

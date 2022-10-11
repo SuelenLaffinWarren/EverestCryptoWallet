@@ -1,23 +1,72 @@
+import 'package:everest_card2_listagem/movimentations/model/movimentations_model.dart';
+import 'package:everest_card2_listagem/movimentations/provider/movimentations_provider.dart';
+import 'package:everest_card2_listagem/portfolio/provider/isVisible_provider.dart';
+import 'package:everest_card2_listagem/shared/template/app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../shared/bottom_navigation/bottom_navigation_page.dart';
 
-class MovimentationsScreen extends StatefulWidget {
+import '../widgets/list_tile_movimentations.dart';
+
+class MovimentationsScreen extends StatefulHookConsumerWidget {
   static const route = '/movimentations';
-  const MovimentationsScreen({Key? key}) : super(key: key);
+  const MovimentationsScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<MovimentationsScreen> createState() => _MovimentationsScreenState();
+  ConsumerState<MovimentationsScreen> createState() =>
+      _MovimentationsScreenState();
 }
 
-class _MovimentationsScreenState extends State<MovimentationsScreen> {
+class _MovimentationsScreenState extends ConsumerState<MovimentationsScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Página em construção'),
+    List<MovimentationsModel> list = [];
+    final isVisible = ref.watch(stateVisible.state);
+    final movimentationList = ref.watch(movimentationListProvider);
+
+    return Scaffold(
+      appBar: AppBarTemplate(title: 'Movimentações'),
+      body: SafeArea(
+        child: Visibility(
+          visible: ref.watch(movimentationListProvider).isNotEmpty,
+          replacement: Scaffold(
+            body: Center(
+              child: Column(
+                children: [
+                  Lottie.asset('assets/lottie/not_found.json',
+                      width: 150, height: 150),
+                  const Text(
+                    'Não há movimentações',
+                    style: TextStyle(fontSize: 25),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: ref.watch(movimentationListProvider).length,
+            itemBuilder: (context, index) {
+              list.add(ref.watch(movimentationListProvider.state).state[index]);
+
+              return ListTileMovimentation(
+                isVisible: isVisible,
+                movimentation: movimentationList[index],
+              );
+            },
+          ),
+        ),
       ),
-      bottomNavigationBar: BottomNavigationWallet(
+      bottomNavigationBar: const BottomNavigationWallet(
         selectedIndex: 1,
       ),
     );

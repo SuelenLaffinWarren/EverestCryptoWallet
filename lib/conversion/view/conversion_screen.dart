@@ -1,5 +1,4 @@
-import 'package:everest_card2_listagem/shared/template/app_bar.dart';
-
+import '../../shared/template/app_bar.dart';
 import '../widgets/body_convertion.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -30,9 +29,7 @@ class _ConversionBodyState extends ConsumerState<ConversionScreen> {
     return cryptoData.when(
       data: (data) {
         return Scaffold(
-          appBar: AppBarTemplate(
-            title: 'Converter',
-          ),
+          appBar: AppBarTemplate(title: 'Converter'),
           body: SafeArea(
             child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),

@@ -1,8 +1,7 @@
+import 'package:everest_card2_listagem/portfolio/view/home_portofolio_screen.dart';
+import 'package:everest_card2_listagem/shared/utils/arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-import '../../portfolio/view/home_portofolio_screen.dart';
-import '../routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   static const route = '/splash';
@@ -17,15 +16,10 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3)).then(
-      (value) => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return const HomePortfolioScreen();
-          },
-        ),
-      ),
-    );
+    Future.delayed(const Duration(seconds: 3))
+        .then((value) => Navigator.of(context).pushNamed(
+              HomePortfolioScreen.route,
+            ));
   }
 
   @override

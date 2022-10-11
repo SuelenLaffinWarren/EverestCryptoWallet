@@ -1,7 +1,5 @@
-import 'package:everest_card2_listagem/success/widgets/app_bar_success.dart';
 import 'package:flutter/material.dart';
-
-import '../widgets/body_success.dart';
+import 'package:lottie/lottie.dart';
 
 class SucessConversionScreen extends StatefulWidget {
   const SucessConversionScreen({Key? key}) : super(key: key);
@@ -14,12 +12,47 @@ class SucessConversionScreen extends StatefulWidget {
 class _SucessConversionScreenState extends State<SucessConversionScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: AppBarSuccess(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(''),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/movimentations');
+              },
+              child: const Text('Movimentações'))
+        ],
+      ),
       body: Center(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: BodySuccess(),
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Lottie.asset('assets/lottie/check.json', width: 200, height: 200),
+              const Text(
+                'Conversão efetuada',
+                style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const Text('Conversão de moeda efetuada com sucesso!',
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey)),
+            ],
+          ),
         ),
       ),
     );

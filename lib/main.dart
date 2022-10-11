@@ -1,3 +1,4 @@
+import 'package:everest_card2_listagem/shared/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,7 +13,7 @@ void main() {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: '/splash',
+        initialRoute: SplashScreen.route,
         onGenerateRoute: RoutesApp.generateRoute,
       ),
     ),

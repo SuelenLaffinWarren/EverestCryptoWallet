@@ -76,20 +76,22 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: const EdgeInsets.only(left: 13, right: 13),
           height: 49,
           width: MediaQuery.of(context).size.width,
           color: Colors.grey.shade200,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Saldo disponível',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-              ),
-              Text(
-                  '${widget.args.userCryptoValue} ${widget.args.cryptoData.symbol.toUpperCase()}'),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.only(left: 13, right: 13),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Saldo disponível',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                ),
+                Text(
+                    '${widget.args.userCryptoValue} ${widget.args.cryptoData.symbol.toUpperCase()}'),
+              ],
+            ),
           ),
         ),
         const SizedBox(

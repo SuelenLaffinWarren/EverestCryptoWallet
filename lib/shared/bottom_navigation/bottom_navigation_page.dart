@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/arguments.dart';
+
 class BottomNavigationWallet extends StatelessWidget {
   const BottomNavigationWallet({
     Key? key,
@@ -13,14 +15,11 @@ class BottomNavigationWallet extends StatelessWidget {
     void onTap(index) {
       switch (index) {
         case 0:
-          Navigator.pushNamed(
-            context,
-            '/portfolio',
-          );
+          Navigator.of(context).pushNamed('/portfolio');
 
           break;
         case 1:
-          Navigator.pushNamed(context, '/movimentations');
+          Navigator.of(context).pushNamed('/movimentations');
           break;
       }
     }

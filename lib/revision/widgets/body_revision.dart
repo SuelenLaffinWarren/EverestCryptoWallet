@@ -75,15 +75,19 @@ class BodyRevision extends StatelessWidget {
         RowRevision(
           label: 'Câmbio',
           value:
-              ' 1 ${args.cryptoData.symbol.toUpperCase()} = ${getCambio().toStringAsFixed(4)} ${secondCrypto.state.symbol.toUpperCase()}',
+              ' 1 ${args.cryptoData.symbol.toUpperCase()} = ${getCambio().toStringAsFixed(4)}  ${secondCrypto.state.symbol.toUpperCase()}',
         ),
         const SizedBox(
           height: 30,
         ),
-        const SizedBox(
+        SizedBox(
           width: 343,
           height: 56,
-          child: RevisionButton(),
+          child: RevisionButton(
+            secondCrypto: secondCrypto,
+            totalEstimated: totalEstimated,
+            args: args,
+          ),
         ),
       ],
     );
