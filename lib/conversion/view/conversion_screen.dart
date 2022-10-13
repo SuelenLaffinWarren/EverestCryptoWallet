@@ -26,28 +26,18 @@ class _ConversionBodyState extends ConsumerState<ConversionScreen> {
   Widget build(BuildContext context) {
     final cryptoData = ref.watch(cryptoListProvider);
 
-    return cryptoData.when(
-      data: (data) {
-        return Scaffold(
-          appBar: AppBarTemplate(title: 'Converter'),
-          body: SafeArea(
-            child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: BodyConvertion(
-                  args: widget.args,
-                )),
-          ),
-          bottomSheet: BottomSheetConversion(
-            crypto: widget.args.cryptoData,
-            userValue: widget.args.userCryptoValue,
-          ),
-        );
-      },
-      error: (error, stackTrace) => const Center(
-        child: Text('Error'),
+    return Scaffold(
+      appBar: AppBarTemplate(title: 'Converter'),
+      body: SafeArea(
+        child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: BodyConvertion(
+              args: widget.args,
+            )),
       ),
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
+      bottomSheet: BottomSheetConversion(
+        crypto: widget.args.cryptoData,
+        userValue: widget.args.userCryptoValue,
       ),
     );
   }

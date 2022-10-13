@@ -36,59 +36,54 @@ class _RowConvertButtonsState extends ConsumerState<RowConvertButtons> {
       listCrypto.add(crypto);
     }
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-              padding: const EdgeInsets.only(left: 45, top: 20),
-              child: SizedBox(
-                  width: 120,
-                  height: 55,
-                  child: DropdownButtonFormField(
-                    onChanged: (value) {},
+    return Padding(
+      padding: const EdgeInsets.only(left: 35, top: 15, right: 10),
+      child: SingleChildScrollView(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: 120,
+              height: 55,
+              child: DropdownButtonFormField(
+                onChanged: (value) {},
+                value: widget.symbol,
+                isExpanded: true,
+                decoration: InputDecoration(
+                    labelText: 'Crypto',
+                    border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(227, 228, 235, 1)),
+                        borderRadius: BorderRadius.circular(30)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(227, 228, 235, 1)),
+                        borderRadius: BorderRadius.circular(30))),
+                items: [
+                  DropdownMenuItem(
                     value: widget.symbol,
-                    isExpanded: true,
-                    decoration: InputDecoration(
-                        labelText: 'Crypto',
-                        border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Color.fromRGBO(227, 228, 235, 1)),
-                            borderRadius: BorderRadius.circular(30)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Color.fromRGBO(227, 228, 235, 1)),
-                            borderRadius: BorderRadius.circular(30))),
-                    items: [
-                      DropdownMenuItem(
-                        value: widget.symbol,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Image.network(
-                              widget.image,
-                              height: 24,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Text(widget.symbol.toUpperCase()),
-                          ],
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Image.network(
+                          widget.image,
+                          height: 24,
                         ),
-                      ),
-                    ],
-                  ))),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(widget.symbol.toUpperCase()),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(
               CupertinoIcons.arrow_right_arrow_left,
               color: Color.fromRGBO(224, 43, 87, 1),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-            child: Padding(
+            Padding(
               padding: const EdgeInsets.only(left: 10, right: 30),
               child: SizedBox(
                 width: 120,
@@ -126,8 +121,8 @@ class _RowConvertButtonsState extends ConsumerState<RowConvertButtons> {
                     onChanged: widget.onChange),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
