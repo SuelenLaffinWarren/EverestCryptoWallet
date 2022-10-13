@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:everest_card2_listagem/shared/utils/api_utils.dart';
+import '../../utils/api_utils.dart';
 import 'market_end_point.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

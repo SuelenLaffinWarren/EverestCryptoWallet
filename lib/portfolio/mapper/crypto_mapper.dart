@@ -1,20 +1,24 @@
 import 'package:decimal/decimal.dart';
 
+import '../../shared/api/response/crypto_response.dart';
+import '../model/crypto_list_view_data.dart';
 import '../model/crypto_view_data.dart';
-import '../../shared/api/response/crypto_results_response.dart';
 
-extension CryptoMapper on CryptoResultsResponse {
-  List<CryptoViewData> toViewData() {
-    return results
-        .map(
-          (result) => CryptoViewData(
-              id: result.id,
-              symbol: result.symbol,
-              name: result.name,
-              image: result.image,
-              current_price: Decimal.parse('${result.current_price}'),
-              price_change_percentage_24h: result.price_change_percentage_24h),
-        )
-        .toList();
+extension CryptoMapper on List<CryptoResponse> {
+  CryptoListViewData toViewData() {
+    return CryptoListViewData(
+      cryptoListViewData: map(
+        (crypto) {
+          return CryptoViewData(
+            id: crypto.id,
+            symbol: crypto.symbol,
+            name: crypto.name,
+            image: crypto.image,
+            current_price: Decimal.parse('${crypto.current_price}'),
+            price_change_percentage_24h: crypto.price_change_percentage_24h,
+          );
+        },
+      ).toList(),
+    );
   }
 }

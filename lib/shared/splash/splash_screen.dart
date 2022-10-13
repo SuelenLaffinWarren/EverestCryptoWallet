@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../portfolio/view/home_portofolio_screen.dart';
-import '../../portfolio/widgtes/crypto_list_view.dart';
+import '../routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   static const route = '/splash';
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();

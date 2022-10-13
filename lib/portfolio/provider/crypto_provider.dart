@@ -1,6 +1,7 @@
 import 'package:decimal/decimal.dart';
-import 'package:everest_card2_listagem/crypto_details/model/market_graphic_view_data.dart';
-import 'package:everest_card2_listagem/portfolio/useCase/total_crypto_value_use_case.dart';
+import '../../crypto_details/model/market_graphic_view_data.dart';
+import '../model/crypto_list_view_data.dart';
+import '../useCase/total_crypto_value_use_case.dart';
 import '../../shared/api/repository/repository_provider.dart';
 import '../useCase/crypto_use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -62,15 +63,16 @@ final getCryptoUseCaseProvider = Provider((ref) {
   return CryptoUseCase(repository: ref.read(repositoryCryptoProvider));
 });
 
-final cryptoProvider = FutureProvider<List<CryptoViewData>>((ref) async {
+final cryptoProvider = FutureProvider<CryptoListViewData>((ref) async {
   return ref.read(getCryptoUseCaseProvider).execute();
 });
 
-final getDataCryptoProvider = Provider(
+final getAllCryptoUseCaseProvider = StateProvider(
     (ref) => CryptoUseCase(repository: ref.read(repositoryCryptoProvider)));
 
-final cryptoListProvider = FutureProvider<List<CryptoViewData>>(
-    (ref) async => await ref.read(getDataCryptoProvider).execute());
+final allCryptoListProvider =
+    FutureProvider((ref) => ref.read(getAllCryptoUseCaseProvider).execute());
+
 final currentPriceGraphicProvider = StateProvider((ref) => Decimal.parse('0'));
 
 final totalUseCaseProvider = StateProvider((ref) =>
@@ -81,3 +83,14 @@ final getTotalProvider = FutureProvider.family<Decimal, List<double>>(
 
 final userTotalProvider =
     Provider((ref) => [0.78, 1.54, 3.45, 0.52, 0.45, 1.75]);
+
+class UserTotalNotifier extends StateNotifier<Decimal> {
+  UserTotalNotifier()
+      : super(
+          Decimal.parse('0'),
+        );
+}
+
+var userTotalCryptoProvider = StateNotifierProvider<UserTotalNotifier, Decimal>(
+  (ref) => UserTotalNotifier(),
+);
