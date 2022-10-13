@@ -42,51 +42,39 @@ class BodyRevision extends StatelessWidget {
         ),
         const Divider(
           thickness: 1,
-        ),
-        const SizedBox(
-          height: 10,
+          height: 25,
         ),
         RowRevision(
             label: 'Converter',
             value:
                 '${controller.state.text} ${args.cryptoData.symbol.toUpperCase()}'),
-        const SizedBox(
-          height: 10,
-        ),
         const Divider(
           thickness: 1,
-        ),
-        const SizedBox(
-          height: 10,
+          height: 25,
         ),
         RowRevision(
             label: 'Receber',
             value:
                 '${totalEstimated.state.toStringAsFixed(4)} ${secondCrypto.state.symbol.toUpperCase()}'),
-        const SizedBox(
-          height: 10,
-        ),
         const Divider(
           thickness: 1,
-        ),
-        const SizedBox(
-          height: 10,
+          height: 25,
         ),
         RowRevision(
           label: 'Câmbio',
           value:
               ' 1 ${args.cryptoData.symbol.toUpperCase()} = ${getCambio().toStringAsFixed(4)}  ${secondCrypto.state.symbol.toUpperCase()}',
         ),
-        const SizedBox(
-          height: 30,
-        ),
-        SizedBox(
-          width: 343,
-          height: 56,
-          child: RevisionButton(
-            secondCrypto: secondCrypto,
-            totalEstimated: totalEstimated,
-            args: args,
+        Padding(
+          padding: const EdgeInsets.only(top: 30),
+          child: SizedBox(
+            width: 343,
+            height: 56,
+            child: RevisionButton(
+              secondCrypto: secondCrypto,
+              totalEstimated: totalEstimated,
+              args: args,
+            ),
           ),
         ),
       ],

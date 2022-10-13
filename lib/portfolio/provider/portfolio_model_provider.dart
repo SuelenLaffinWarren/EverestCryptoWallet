@@ -10,11 +10,6 @@ class CriptoNotifier extends StateNotifier<PortfolioModel> {
             quantityUserCrypto: 0.00,
           ),
         );
-  // void variationChange(int time) {
-  //   time = time == 1 ? 2 : time;
-  //   state.price_change_percentage_24h;
-  // }
-
 }
 
 var cryptoPortfolioProvider =

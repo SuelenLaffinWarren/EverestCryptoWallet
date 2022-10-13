@@ -31,14 +31,12 @@ class _RevisionScreenState extends ConsumerState<RevisionScreen> {
           ),
           body: SafeArea(
             child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: BodyRevision(
-                  controller: controller,
-                  totalEstimated: totalEstimated,
-                  secondCrypto: secondCrypto,
-                  args: widget.args,
-                ),
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: BodyRevision(
+                controller: controller,
+                totalEstimated: totalEstimated,
+                secondCrypto: secondCrypto,
+                args: widget.args,
               ),
             ),
           ),
