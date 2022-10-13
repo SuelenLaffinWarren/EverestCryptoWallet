@@ -23,10 +23,6 @@ class MovimentationsScreen extends StatefulHookConsumerWidget {
 
 class _MovimentationsScreenState extends ConsumerState<MovimentationsScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     List<MovimentationsModel> list = [];
