@@ -37,9 +37,7 @@ class DetailsCryptoScreenState extends ConsumerState<DetailsCryptoScreen> {
           leading: IconButton(
               onPressed: () {
                 ref.watch(buttonDaysProvider.state).state;
-                Navigator.of(context).pushNamed(
-                  '/portfolio',
-                );
+                Navigator.of(context).pop();
               },
               icon: const Icon(Icons.arrow_back)),
           iconTheme: const IconThemeData(color: Colors.black),

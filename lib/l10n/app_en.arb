@@ -1,0 +1,107 @@
+{
+    "language": "English",
+    "@language": {
+      "description": "The current Language"
+    },
+    "crypto": "Crypto",
+    "@crypto":{
+        "description": "The coin"
+    },
+    "totalCoinValue": "Total coin value",
+    "@totalCoinValue": {
+        "description": "Total coin value"
+    },
+    "portfolio": "Portfolio",
+    "@portfolio":{
+        "description": "Bottom navigation bar item"
+    },
+    "movimentations": "Movimentations",
+    "@movimentations":{
+        "description": "Bottom navigation bar item"
+    },
+    "details": "Details",
+    "@details":{
+        "description": "Details page app bar"
+    },
+    "currentPrice": "Current price",
+    "@currentPrice":{
+        "description": "List tile details page item 1"
+    },
+    "twentyFourHVariation": "24h variation",
+    "@twentyFourHVariation":{
+        "description": "List tile details page item 2"
+    },
+    "theAmount": "The amount",
+    "@theAmount":{
+        "description": "List tile details page item 3"
+    },
+    "value": "Value",
+    "@value":{
+        "description": "List tile details page item 4"
+    },
+    "convertCurrency": "Convert currency",
+    "@convertCurrency":{
+        "description": "Details page button "
+    },
+    "toConvert": " To Convert",
+    "@toConvert":{
+        "description": "Convert page app bar "
+    },
+    "balanceAvailable": "Balance available",
+    "@balanceAvailable":{
+        "description": "Convert page info top"
+    },
+    "howLikeConvert": "How much would you like to convert?",
+    "@howLikeConvert":{
+        "description": "Convert page question"
+    },
+    "estimatedTotal": "Estimated total",
+    "@estimatedTotal":{
+        "description": "Convert page bottom sheet"
+    },
+    "review": "Review",
+    "@review":{
+        "description": "Review page app bar"
+    },
+    "reviewQuestion": "Review your conversion data",
+    "@reviewQuestion":{
+        "description": "Review page question"
+    },
+    "toReceive": "To receive",
+    "@toReceive":{
+        "description": "Review page list tile item 1"
+    },
+    "exchange": "Exchange",
+    "@exchange":{
+        "description": "Review page list tile item 2"
+    },
+    "completeConversion": "Complete conversion",
+    "@completeConversion":{
+        "description": "Review page button"
+    },
+    "conversionPerformed": "Conversion performed",
+    "@conversionPerformed":{
+        "description": "Success page text 1"
+    },
+    "currencyConversionSuccessful": "Complete currency conversion successful",
+    "@currencyConversionSuccessful":{
+        "description": "Success page text 2"
+    },
+    "movimentations": "Movimentations",
+    "@movimentations":{
+        "description": "Movimentations page app bar"
+    },
+    "proof": "Proof",
+    "@proof":{
+        "description": "Movimentations page proof movements"
+    },
+    "date": "Date",
+    "@date":{
+        "description": "Movimentations page proof movements list item 1"
+    },
+    "movementQuantity": "Movement quantity",
+    "@movementQuantity":{
+        "description": "Movimentations page proof movements list item 2"
+    }
+
+}
