@@ -60,7 +60,7 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
       return true;
     }
 
-    floatButtonColor() {
+    buttonBottomSheet() {
       if (controllerValue.state.text != '') {
         if (valueIsPossible()) {
           ref.read(boolConversionProvider.state).state = true;
@@ -76,35 +76,34 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: const EdgeInsets.only(left: 13, right: 13),
           height: 49,
           width: MediaQuery.of(context).size.width,
           color: Colors.grey.shade200,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Saldo disponível',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-              ),
-              Text(
-                  '${widget.args.userCryptoValue} ${widget.args.cryptoData.symbol.toUpperCase()}'),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 13,
+              right: 13,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Saldo disponível',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                ),
+                Text(
+                    '${widget.args.userCryptoValue} ${widget.args.cryptoData.symbol.toUpperCase()}'),
+              ],
+            ),
           ),
         ),
-        const SizedBox(
-          height: 15,
-        ),
         const Padding(
-          padding: EdgeInsets.only(left: 13, top: 10),
+          padding: EdgeInsets.only(left: 13, top: 20, bottom: 15),
           child: Text(
             'Quanto você gostaria de \n converter?',
             style: TextStyle(
                 color: Colors.black, fontSize: 26, fontWeight: FontWeight.w700),
           ),
-        ),
-        const SizedBox(
-          height: 10,
         ),
         RowConvertButtons(
           symbol: widget.args.cryptoData.symbol,
@@ -124,7 +123,7 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
             onChange: (value) {
               getConverterValue();
               getTotalEstimated();
-              floatButtonColor();
+              buttonBottomSheet();
             },
           ),
         ),
@@ -140,9 +139,6 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
                     color: valueIsPossible()
                         ? Colors.grey.shade600
                         : Colors.red))),
-        const SizedBox(
-          height: 150,
-        ),
       ],
     );
   }

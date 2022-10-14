@@ -123,9 +123,6 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
               ListTile(
                 title: Column(
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -154,14 +151,9 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
                               ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
                     const Divider(
                       thickness: 1,
-                    ),
-                    const SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,14 +184,9 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
                               ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
                     const Divider(
                       thickness: 1,
-                    ),
-                    const SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -226,14 +213,9 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
                               ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
                     const Divider(
                       thickness: 1,
-                    ),
-                    const SizedBox(
-                      height: 10,
+                      height: 30,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

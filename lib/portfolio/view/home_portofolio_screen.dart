@@ -8,7 +8,9 @@ import '../../shared/bottom_navigation/bottom_navigation_page.dart';
 
 class HomePortfolioScreen extends StatefulHookConsumerWidget {
   static const route = '/portfolio';
-  const HomePortfolioScreen({Key? key}) : super(key: key);
+  const HomePortfolioScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   ConsumerState<HomePortfolioScreen> createState() => _WalletScreenState();

@@ -63,7 +63,7 @@ final cryptoListProvider = FutureProvider<CryptoListViewData>((ref) async {
   return ref.read(getCryptoUseCaseProvider).execute();
 });
 
-final getCryptoUseCaseProvider = StateProvider((ref) {
+final getCryptoUseCaseProvider = Provider((ref) {
   return CryptoUseCase(repository: ref.read(repositoryCryptoProvider));
 });
 final allCryptoListProvider =

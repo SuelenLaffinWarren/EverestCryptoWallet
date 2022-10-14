@@ -111,7 +111,7 @@ class RoutesApp {
           },
         );
       case SplashScreen.route:
-        return MaterialPageRoute(builder: (_) {
+        return MaterialPageRoute(builder: (context) {
           return const SplashScreen();
         });
       case DetailsCryptoScreen.route:
