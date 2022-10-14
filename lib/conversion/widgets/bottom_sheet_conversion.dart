@@ -1,4 +1,6 @@
 import 'package:decimal/decimal.dart';
+import 'package:everest_card2_listagem/revision/view/revision_screen.dart';
+import 'package:everest_card2_listagem/shared/utils/arguments.dart';
 import '../provider/conversion_provider.dart';
 import '../../portfolio/model/crypto_view_data.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +11,11 @@ class BottomSheetConversion extends StatefulHookConsumerWidget {
     Key? key,
     required this.crypto,
     required this.userValue,
-    required this.estimatedTotal,
-    required this.selectCrypto,
   }) : super(key: key);
 
   CryptoViewData crypto;
   Decimal userValue;
-  double estimatedTotal;
-  String selectCrypto;
+
   @override
   ConsumerState<BottomSheetConversion> createState() =>
       _BottomSheetConversionState();
@@ -25,8 +24,61 @@ class BottomSheetConversion extends StatefulHookConsumerWidget {
 class _BottomSheetConversionState extends ConsumerState<BottomSheetConversion> {
   @override
   Widget build(BuildContext context) {
-    bool boolConversion = ref.watch(boolConversionProvider);
-    double conversionPrice = ref.watch(conversionPriceProvider);
+    final controllerValue = ref.watch(textFieldControllerProvider.state);
+    final secondCrypto = ref.watch(secondSelectedCryptoProvider.state);
+    final estimatedTotal = ref.watch(totalEstimatedProvider.state);
+    final isButtonSelected = ref.watch(boolConversionProvider.state);
+
+    void _showDialogInvalidValue() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Valor inválido"),
+            actions: [
+              TextButton(
+                child: const Text("Fechar"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    void _showDialogNullValue() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("O campo de valor está vazio!"),
+            actions: [
+              TextButton(
+                child: const Text("Fechar"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    bool validationController() {
+      if (controllerValue.state.text != '') {
+        if (double.parse(controllerValue.state.text.replaceAll(',', '.')) >
+            (widget.userValue.toDouble())) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return true;
+      }
+    }
 
     return DraggableScrollableSheet(
       expand: false,
@@ -54,23 +106,39 @@ class _BottomSheetConversionState extends ConsumerState<BottomSheetConversion> {
                 const SizedBox(
                   height: 5,
                 ),
-                Text(
-                  conversionPrice != 0
-                      ? '${widget.estimatedTotal.toStringAsFixed(3)} ${widget.selectCrypto.toUpperCase()}'
-                      : '0.000 ${widget.selectCrypto.toUpperCase()}',
-                  style: const TextStyle(fontSize: 19),
+                Padding(
+                  padding: const EdgeInsets.only(left: 25),
+                  child: Text(
+                    validationController()
+                        ? '${estimatedTotal.state.toStringAsFixed(2)} ${secondCrypto.state.symbol.toUpperCase()}'
+                        : '0.00 ${secondCrypto.state.symbol.toUpperCase()}',
+                    style: const TextStyle(fontSize: 19),
+                  ),
                 )
               ],
             ),
             Padding(
               padding: const EdgeInsets.only(right: 10, bottom: 10),
               child: FloatingActionButton(
-                backgroundColor: boolConversion ? Colors.pink : Colors.grey,
+                backgroundColor:
+                    isButtonSelected.state ? Colors.pink : Colors.grey,
                 child: const Icon(
                   Icons.arrow_forward_sharp,
                 ),
                 onPressed: () {
-                  setState(() {});
+                  setState(() {
+                    if (controllerValue.state.text == '') {
+                      return _showDialogNullValue();
+                    }
+                    if (validationController() == false) {
+                      return _showDialogInvalidValue();
+                    } else {
+                      Navigator.of(context).pushNamed(RevisionScreen.route,
+                          arguments: Arguments(
+                              cryptoData: widget.crypto,
+                              userCryptoValue: widget.userValue));
+                    }
+                  });
                 },
               ),
             ),

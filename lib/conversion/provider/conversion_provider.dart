@@ -1,4 +1,5 @@
 import 'package:decimal/decimal.dart';
+import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,9 +16,16 @@ final conversionProvider = StateProvider<CryptoViewData>(
   ),
 );
 
-var conversionPriceProvider = StateProvider((ref) => 0.0);
+var conversionPriceProvider = StateProvider((ref) => Decimal.parse('0'));
+
 var boolConversionProvider = StateProvider<bool>((ref) => false);
 
-var cryptoSymbolProvider = StateProvider((ref) => '');
+var totalEstimatedProvider = StateProvider((ref) => 0.00);
+var cambioCryptoProvider = StateProvider((ref) => 0.00);
+
 var textFieldControllerProvider =
     StateProvider((ref) => TextEditingController());
+
+final secondSelectedCryptoProvider = StateProvider<CryptoViewData>((ref) {
+  return ref.read(cryptoListProvider).value!.cryptoListViewData.last;
+});

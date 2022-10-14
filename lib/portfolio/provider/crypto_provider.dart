@@ -59,19 +59,15 @@ class FormatValueNumber {
   }
 }
 
-final getCryptoUseCaseProvider = Provider((ref) {
-  return CryptoUseCase(repository: ref.read(repositoryCryptoProvider));
-});
-
-final cryptoProvider = FutureProvider<CryptoListViewData>((ref) async {
+final cryptoListProvider = FutureProvider<CryptoListViewData>((ref) async {
   return ref.read(getCryptoUseCaseProvider).execute();
 });
 
-final getAllCryptoUseCaseProvider = StateProvider(
-    (ref) => CryptoUseCase(repository: ref.read(repositoryCryptoProvider)));
-
+final getCryptoUseCaseProvider = StateProvider((ref) {
+  return CryptoUseCase(repository: ref.read(repositoryCryptoProvider));
+});
 final allCryptoListProvider =
-    FutureProvider((ref) => ref.read(getAllCryptoUseCaseProvider).execute());
+    FutureProvider((ref) => ref.read(getCryptoUseCaseProvider).execute());
 
 final currentPriceGraphicProvider = StateProvider((ref) => Decimal.parse('0'));
 

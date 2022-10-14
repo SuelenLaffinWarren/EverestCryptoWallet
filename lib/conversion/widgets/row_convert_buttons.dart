@@ -1,4 +1,5 @@
-import '../provider/conversion_provider.dart';
+import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,14 +11,14 @@ class RowConvertButtons extends StatefulHookConsumerWidget {
     Key? key,
     required this.symbol,
     required this.image,
-    required this.listCrypto,
-    required this.selectCrypto,
+    required this.cryptoViewData,
+    required this.onChange,
   }) : super(key: key);
 
-  String selectCrypto;
   final String symbol;
   final String image;
-  List<CryptoViewData> listCrypto;
+  CryptoViewData cryptoViewData;
+  final void Function(CryptoViewData?) onChange;
 
   @override
   ConsumerState<RowConvertButtons> createState() => _RowConvertButtonsState();
@@ -26,74 +27,58 @@ class RowConvertButtons extends StatefulHookConsumerWidget {
 class _RowConvertButtonsState extends ConsumerState<RowConvertButtons> {
   @override
   Widget build(BuildContext) {
-    List<DropdownMenuItem> getDropList(List<CryptoViewData> listCrypto) {
-      List<DropdownMenuItem> dropCryptoList = listCrypto
-          .map((crypto) => DropdownMenuItem(
-                value: crypto.symbol.toUpperCase(),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Image.network(
-                      crypto.image,
-                      height: 27,
-                    ),
-                    const SizedBox(
-                      width: 6,
-                    ),
-                    Text(crypto.symbol.toUpperCase())
-                  ],
-                ),
-              ))
-          .toList();
-      return dropCryptoList;
+    final cryptoList = ref.watch(cryptoListProvider);
+    List<CryptoViewData> listCrypto = [];
+
+    for (CryptoViewData crypto in cryptoList.value!.cryptoListViewData) {
+      listCrypto.add(crypto);
     }
 
     return SingleChildScrollView(
+      padding: const EdgeInsets.only(left: 20, top: 20),
       scrollDirection: Axis.horizontal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10, right: 30),
-                child: SizedBox(
-                    width: 120,
-                    height: 55,
-                    child: DropdownButtonFormField(
-                      onChanged: (value) {},
+            padding: const EdgeInsets.only(left: 10, right: 30),
+            child: SizedBox(
+                width: 120,
+                height: 55,
+                child: DropdownButtonFormField(
+                  onChanged: (value) {},
+                  value: widget.symbol,
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                      labelText: 'Crypto',
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Color.fromRGBO(227, 228, 235, 1)),
+                          borderRadius: BorderRadius.circular(30)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Color.fromRGBO(227, 228, 235, 1)),
+                          borderRadius: BorderRadius.circular(30))),
+                  items: [
+                    DropdownMenuItem(
                       value: widget.symbol,
-                      isExpanded: true,
-                      decoration: InputDecoration(
-                          labelText: 'Crypto',
-                          border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromRGBO(227, 228, 235, 1)),
-                              borderRadius: BorderRadius.circular(30)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromRGBO(227, 228, 235, 1)),
-                              borderRadius: BorderRadius.circular(30))),
-                      items: [
-                        DropdownMenuItem(
-                          value: widget.symbol,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Image.network(
-                                widget.image,
-                                height: 24,
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Text(widget.symbol.toUpperCase()),
-                            ],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Image.network(
+                            widget.image,
+                            height: 24,
                           ),
-                        ),
-                      ],
-                    )),
-              )),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(widget.symbol.toUpperCase()),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+          ),
           IconButton(
             onPressed: () {},
             icon: const Icon(
@@ -109,28 +94,36 @@ class _RowConvertButtonsState extends ConsumerState<RowConvertButtons> {
                 width: 120,
                 height: 55,
                 child: DropdownButtonFormField(
-                  value: widget.selectCrypto,
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                      labelText: 'Crypto',
-                      border: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(227, 228, 235, 1)),
-                          borderRadius: BorderRadius.circular(30)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromRGBO(227, 228, 235, 1)),
-                          borderRadius: BorderRadius.circular(30))),
-                  items: getDropList(widget.listCrypto),
-                  onChanged: (op) {
-                    setState(() {
-                      widget.selectCrypto = op;
-                      ref.read(conversionProvider.notifier).state =
-                          widget.listCrypto.firstWhere(
-                              (crypto) => crypto.symbol.toUpperCase() == op!);
-                    });
-                  },
-                ),
+                    value: widget.cryptoViewData,
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                        labelText: 'Crypto',
+                        border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromRGBO(227, 228, 235, 1)),
+                            borderRadius: BorderRadius.circular(30)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromRGBO(227, 228, 235, 1)),
+                            borderRadius: BorderRadius.circular(30))),
+                    items: listCrypto.map<DropdownMenuItem<CryptoViewData>>(
+                        (CryptoViewData crypto) {
+                      return DropdownMenuItem(
+                          value: crypto,
+                          child: Row(
+                            children: [
+                              Image.network(
+                                crypto.image,
+                                scale: 13,
+                              ),
+                              const SizedBox(
+                                width: 6,
+                              ),
+                              Text(crypto.symbol.toUpperCase())
+                            ],
+                          ));
+                    }).toList(),
+                    onChanged: widget.onChange),
               ),
             ),
           ),

@@ -80,7 +80,7 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
                   child: Text(
                     NumberFormat.simpleCurrency(
                             locale: 'pt-BR', decimalDigits: 2)
-                        .format(DecimalIntl(widget.crypto.current_price)),
+                        .format(DecimalIntl(priceCurrentGraphic.state)),
                     style: const TextStyle(
                         fontSize: 32,
                         fontFamily: 'Montserrat',
