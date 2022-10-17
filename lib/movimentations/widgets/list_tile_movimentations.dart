@@ -66,21 +66,24 @@ class _ListTileMovimentationState extends ConsumerState<ListTileMovimentation> {
                           thickness: 1,
                         ),
                         RowProofMovimentations(
-                            label1: 'Qtd da movimentação: ',
+                            label1:
+                                AppLocalizations.of(context)!.movementQuantity,
                             label2:
                                 '${widget.movimentation.controller} ${widget.movimentation.firstSymbol.toUpperCase()}'),
                         const Divider(
                           thickness: 1,
                         ),
                         RowProofMovimentations(
-                            label1: 'Total estimado: ',
+                            label1:
+                                AppLocalizations.of(context)!.estimatedTotal,
                             label2:
                                 '${widget.movimentation.totalEstimated.toStringAsFixed(3)} ${widget.movimentation.secondCrypto.toUpperCase()}'),
                         const Divider(
                           thickness: 1,
                         ),
                         RowProofMovimentations(
-                            label1: 'Preço convertido:  ',
+                            label1:
+                                AppLocalizations.of(context)!.convertCurrency,
                             label2: NumberFormat.simpleCurrency(
                                     decimalDigits: 3, locale: 'pt-BR')
                                 .format(widget.movimentation.convertPrice
