@@ -21,9 +21,17 @@
     "completeConversion": "Conversión completa",    
     "conversionPerformed": "Conversión realizada",    
     "currencyConversionSuccessful": "Conversión de moneda completa exitosa",    
-    "movimentations": "Movimientos",   
     "proof": "Prueba",   
     "date": "Fecha",    
-    "movementQuantity": "Cantidad de movimiento"    
+    "movementQuantity": "Cantidad de movimiento",
+    "balanceUnavailable": "Saldo no disponible",
+    "invalidValue": "Valor no válido",
+    "close": "Cerca",
+    "valueFieldEmpty": "El campo de valor está vacío!",
+    "noMovimentations": "No hay movimientos",
+    "dateFormat": "dd/MM/yyyy",
+    "locale": "es-ES",
+    "coinLocale": "eur"
+      
 
 }  

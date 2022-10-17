@@ -3,7 +3,7 @@ import '../widgets/body_convertion.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../portfolio/provider/crypto_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../shared/utils/arguments.dart';
 
 import '../widgets/bottom_sheet_conversion.dart';
@@ -24,10 +24,8 @@ class ConversionScreen extends StatefulHookConsumerWidget {
 class _ConversionBodyState extends ConsumerState<ConversionScreen> {
   @override
   Widget build(BuildContext context) {
-    final cryptoData = ref.watch(cryptoListProvider);
-
     return Scaffold(
-      appBar: AppBarTemplate(title: 'Converter'),
+      appBar: AppBarTemplate(title: AppLocalizations.of(context)!.toConvert),
       body: SafeArea(
         child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),

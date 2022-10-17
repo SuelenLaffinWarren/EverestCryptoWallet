@@ -6,6 +6,8 @@ import '../../shared/utils/arguments.dart';
 import 'revision_button.dart';
 import 'row_revision.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class BodyRevision extends StatelessWidget {
   const BodyRevision({
     Key? key,
@@ -30,11 +32,11 @@ class BodyRevision extends StatelessWidget {
 
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 30, right: 30),
+        Padding(
+          padding: const EdgeInsets.only(top: 30, right: 30),
           child: Text(
-            'Revise os dados da \n sua conversão ',
-            style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+            AppLocalizations.of(context)!.reviewQuestion,
+            style: const TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
           ),
         ),
         const SizedBox(
@@ -45,7 +47,7 @@ class BodyRevision extends StatelessWidget {
           height: 25,
         ),
         RowRevision(
-            label: 'Converter',
+            label: AppLocalizations.of(context)!.toConvert,
             value:
                 '${controller.state.text} ${args.cryptoData.symbol.toUpperCase()}'),
         const Divider(
@@ -53,7 +55,7 @@ class BodyRevision extends StatelessWidget {
           height: 25,
         ),
         RowRevision(
-            label: 'Receber',
+            label: AppLocalizations.of(context)!.toReceive,
             value:
                 '${totalEstimated.state.toStringAsFixed(4)} ${secondCrypto.state.symbol.toUpperCase()}'),
         const Divider(
@@ -61,7 +63,7 @@ class BodyRevision extends StatelessWidget {
           height: 25,
         ),
         RowRevision(
-          label: 'Câmbio',
+          label: AppLocalizations.of(context)!.exchange,
           value:
               ' 1 ${args.cryptoData.symbol.toUpperCase()} = ${getCambio().toStringAsFixed(4)}  ${secondCrypto.state.symbol.toUpperCase()}',
         ),

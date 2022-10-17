@@ -7,6 +7,7 @@ import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../portfolio/model/crypto_view_data.dart';
 import '../../portfolio/provider/isVisible_provider.dart';
@@ -126,9 +127,9 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Preço atual',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.currentPrice,
+                          style: const TextStyle(
                               color: Color.fromRGBO(117, 118, 128, 1),
                               fontSize: 19,
                               fontWeight: FontWeight.w400),
@@ -158,9 +159,9 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Variação 24H',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.twentyFourHVariation,
+                          style: const TextStyle(
                               color: Color.fromRGBO(117, 118, 128, 1),
                               fontSize: 19,
                               fontWeight: FontWeight.w400),
@@ -191,9 +192,9 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Quantidade',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.theAmount,
+                          style: const TextStyle(
                               color: Color.fromRGBO(117, 118, 128, 1),
                               fontSize: 19,
                               fontWeight: FontWeight.w400),
@@ -220,9 +221,9 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          'Valor',
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.value,
+                          style: const TextStyle(
                               color: Color.fromRGBO(117, 118, 128, 1),
                               fontSize: 19,
                               fontWeight: FontWeight.w400),
@@ -270,9 +271,9 @@ class _BodyCryptoDetailsState extends ConsumerState<BodyCryptoDetails> {
                             ),
                           ),
                         ),
-                        child: const Text(
-                          'Converter moeda',
-                          style: TextStyle(fontSize: 17),
+                        child: Text(
+                          AppLocalizations.of(context)!.convertCurrency,
+                          style: const TextStyle(fontSize: 17),
                         ),
                       ),
                     ),

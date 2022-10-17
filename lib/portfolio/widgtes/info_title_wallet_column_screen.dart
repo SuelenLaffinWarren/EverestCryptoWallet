@@ -5,6 +5,7 @@ import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../provider/isVisible_provider.dart';
 
@@ -22,8 +23,6 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
   @override
   Widget build(BuildContext context) {
     var isVisibleState = ref.watch(stateVisible.state);
-    final cryptoList = ref.watch(cryptoModelProvider);
-    final totalValueCrypto = ref.watch(totalUseCaseProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,9 +30,9 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Cripto',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.crypto,
+              style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.w700,
                 color: Color.fromRGBO(224, 43, 87, 1),
@@ -81,9 +80,9 @@ class _InfoTitleColumnWalletState extends ConsumerState<InfoTitleColumnWallet> {
         const SizedBox(
           height: 5,
         ),
-        const Text(
-          'Valor total de moedas',
-          style: TextStyle(
+        Text(
+          AppLocalizations.of(context)!.totalCoinValue,
+          style: const TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w500,
             color: Color.fromRGBO(117, 118, 128, 1),

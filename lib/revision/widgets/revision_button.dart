@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../portfolio/model/crypto_view_data.dart';
 import '../../shared/utils/arguments.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RevisionButton extends StatefulHookConsumerWidget {
   const RevisionButton({
@@ -54,9 +55,9 @@ class _RevisionButtonState extends ConsumerState<RevisionButton> {
           color: Color.fromARGB(223, 244, 9, 107),
         ),
       ),
-      child: const Text(
-        'Concluir Conversão',
-        style: TextStyle(fontSize: 17),
+      child: Text(
+        AppLocalizations.of(context)!.completeConversion,
+        style: const TextStyle(fontSize: 17),
       ),
     );
   }
