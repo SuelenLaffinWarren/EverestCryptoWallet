@@ -14,7 +14,7 @@ void main() {
           primarySwatch: Colors.blue,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: SplashScreen.route,
+        home: const SplashScreen(),
         onGenerateRoute: RoutesApp.generateRoute,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

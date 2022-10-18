@@ -13,7 +13,7 @@ import '../utils/arguments.dart';
 class RoutesApp {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case HomePortfolioScreen.route:
+      case '/portfolio':
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
               const HomePortfolioScreen(),

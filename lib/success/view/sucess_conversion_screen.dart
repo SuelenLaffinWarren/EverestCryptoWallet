@@ -15,7 +15,6 @@ class _SucessConversionScreenState extends State<SucessConversionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(''),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
           color: Colors.black,

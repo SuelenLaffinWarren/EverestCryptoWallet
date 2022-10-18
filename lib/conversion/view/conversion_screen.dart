@@ -27,11 +27,9 @@ class _ConversionBodyState extends ConsumerState<ConversionScreen> {
     return Scaffold(
       appBar: AppBarTemplate(title: AppLocalizations.of(context)!.toConvert),
       body: SafeArea(
-        child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: BodyConvertion(
-              args: widget.args,
-            )),
+        child: BodyConvertion(
+          args: widget.args,
+        ),
       ),
       bottomSheet: BottomSheetConversion(
         crypto: widget.args.cryptoData,

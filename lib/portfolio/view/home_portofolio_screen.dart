@@ -29,7 +29,7 @@ class _WalletScreenState extends ConsumerState<HomePortfolioScreen> {
               padding: EdgeInsets.all(12.0),
               child: InfoTitleColumnWallet(),
             ),
-            CryptoListView(),
+            Expanded(child: CryptoListView()),
           ],
         ),
       ),
