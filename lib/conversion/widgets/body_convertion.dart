@@ -1,6 +1,6 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:decimal/decimal.dart';
 
+import '../../shared/utils/number_formater.dart';
 import '../provider/conversion_provider.dart';
 import 'row_convert_buttons.dart';
 import 'text_field_conversion.dart';
@@ -9,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../portfolio/model/crypto_view_data.dart';
 import '../../shared/utils/arguments.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyConvertion extends StatefulHookConsumerWidget {
   BodyConvertion({
@@ -87,9 +88,10 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Saldo disponível',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                Text(
+                  AppLocalizations.of(context)!.balanceAvailable,
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.w400),
                 ),
                 Text(
                     '${widget.args.userCryptoValue} ${widget.args.cryptoData.symbol.toUpperCase()}'),
@@ -97,11 +99,11 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 13, top: 20, bottom: 15),
+        Padding(
+          padding: const EdgeInsets.only(left: 13, top: 20, bottom: 15),
           child: Text(
-            'Quanto você gostaria de \n converter?',
-            style: TextStyle(
+            AppLocalizations.of(context)!.howLikeConvert,
+            style: const TextStyle(
                 color: Colors.black, fontSize: 26, fontWeight: FontWeight.w700),
           ),
         ),
@@ -131,9 +133,9 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
             padding: const EdgeInsets.only(left: 15, top: 10),
             child: Text(
                 valueIsPossible()
-                    ? UtilBrasilFields.obterReal(
-                        double.parse(convertPrice.state.toString()))
-                    : 'Saldo Insuficiente',
+                    ? numberFormater
+                        .format(double.parse(convertPrice.state.toString()))
+                    : AppLocalizations.of(context)!.balanceUnavailable,
                 style: TextStyle(
                     fontSize: 15,
                     color: valueIsPossible()

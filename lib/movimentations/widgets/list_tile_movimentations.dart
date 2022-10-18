@@ -1,10 +1,10 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:everest_card2_listagem/movimentations/model/movimentations_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'row_proof_movimentations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ListTileMovimentation extends StatefulHookConsumerWidget {
   ListTileMovimentation({
@@ -38,9 +38,9 @@ class _ListTileMovimentationState extends ConsumerState<ListTileMovimentation> {
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Comprovante",
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context)!.proof,
+                          style: const TextStyle(
                               fontSize: 28, fontWeight: FontWeight.bold),
                         ),
                         IconButton(
@@ -57,31 +57,37 @@ class _ListTileMovimentationState extends ConsumerState<ListTileMovimentation> {
                           height: 20,
                         ),
                         RowProofMovimentations(
-                          label1: 'Data: ',
-                          label2: DateFormat("dd/MM/yyyy")
+                          label1: AppLocalizations.of(context)!.date,
+                          label2: DateFormat(
+                                  AppLocalizations.of(context)!.dateFormat)
                               .format(widget.movimentation.dateNow),
                         ),
                         const Divider(
                           thickness: 1,
                         ),
                         RowProofMovimentations(
-                            label1: 'Qtd da movimentação: ',
+                            label1:
+                                AppLocalizations.of(context)!.movementQuantity,
                             label2:
                                 '${widget.movimentation.controller} ${widget.movimentation.firstSymbol.toUpperCase()}'),
                         const Divider(
                           thickness: 1,
                         ),
                         RowProofMovimentations(
-                            label1: 'Total estimado: ',
+                            label1:
+                                AppLocalizations.of(context)!.estimatedTotal,
                             label2:
                                 '${widget.movimentation.totalEstimated.toStringAsFixed(3)} ${widget.movimentation.secondCrypto.toUpperCase()}'),
                         const Divider(
                           thickness: 1,
                         ),
                         RowProofMovimentations(
-                            label1: 'Preço convertido:  ',
-                            label2:
-                                '${UtilBrasilFields.obterReal(widget.movimentation.convertPrice.toDouble())} '),
+                            label1:
+                                AppLocalizations.of(context)!.convertCurrency,
+                            label2: NumberFormat.simpleCurrency(
+                                    decimalDigits: 3, locale: 'pt-BR')
+                                .format(widget.movimentation.convertPrice
+                                    .toDouble())),
                         const SizedBox(
                           height: 15,
                         ),
@@ -177,8 +183,10 @@ class _ListTileMovimentationState extends ConsumerState<ListTileMovimentation> {
                 ),
                 widget.isVisible.state
                     ? Text(
-                        UtilBrasilFields.obterReal(
-                            widget.movimentation.convertPrice.toDouble()),
+                        NumberFormat.simpleCurrency(
+                                decimalDigits: 3, locale: 'pt-BR')
+                            .format(
+                                widget.movimentation.convertPrice.toDouble()),
                         style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,

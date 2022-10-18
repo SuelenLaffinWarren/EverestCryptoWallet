@@ -1,7 +1,7 @@
 import 'package:everest_card2_listagem/shared/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'shared/routes/routes.dart';
 
@@ -16,15 +16,8 @@ void main() {
         debugShowCheckedModeBanner: false,
         initialRoute: SplashScreen.route,
         onGenerateRoute: RoutesApp.generateRoute,
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''), // English, no country code
-          Locale('es', ''), // Spanish, no country code
-        ],
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
       ),
     ),
   );

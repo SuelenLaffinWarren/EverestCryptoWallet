@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../portfolio/provider/isVisible_provider.dart';
 import '../widgets/body_crypto_details.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailsCryptoScreen extends StatefulHookConsumerWidget {
   DetailsCryptoScreen({Key? key, required this.crypto, required this.userValue})
@@ -29,9 +30,9 @@ class DetailsCryptoScreenState extends ConsumerState<DetailsCryptoScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Detalhes',
-            style: TextStyle(
+          title: Text(
+            AppLocalizations.of(context)!.details,
+            style: const TextStyle(
                 color: Colors.black, fontSize: 21, fontWeight: FontWeight.w700),
           ),
           leading: IconButton(

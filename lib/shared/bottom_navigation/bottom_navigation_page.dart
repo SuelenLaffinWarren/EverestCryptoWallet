@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/arguments.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomNavigationWallet extends StatelessWidget {
   const BottomNavigationWallet({
@@ -29,12 +29,12 @@ class BottomNavigationWallet extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Image.asset('assets/images/Warren_False.png'),
           activeIcon: Image.asset('assets/images/warrenTrue.png'),
-          label: 'Portfólio',
+          label: AppLocalizations.of(context)!.portfolio,
         ),
         BottomNavigationBarItem(
           icon: Image.asset('assets/images/crypto_false.png'),
           activeIcon: Image.asset('assets/images/Crypto_True.png'),
-          label: 'Movimentações',
+          label: AppLocalizations.of(context)!.movimentations,
         ),
       ],
       selectedItemColor: Colors.black,

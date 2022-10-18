@@ -9,6 +9,7 @@ import 'package:lottie/lottie.dart';
 import '../../shared/bottom_navigation/bottom_navigation_page.dart';
 
 import '../widgets/list_tile_movimentations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MovimentationsScreen extends StatefulHookConsumerWidget {
   static const route = '/movimentations';
@@ -30,7 +31,8 @@ class _MovimentationsScreenState extends ConsumerState<MovimentationsScreen> {
     final movimentationList = ref.watch(movimentationListProvider);
 
     return Scaffold(
-      appBar: AppBarTemplate(title: 'Movimentações'),
+      appBar:
+          AppBarTemplate(title: AppLocalizations.of(context)!.movimentations),
       body: SafeArea(
         child: Visibility(
           visible: ref.watch(movimentationListProvider).isNotEmpty,
@@ -40,9 +42,9 @@ class _MovimentationsScreenState extends ConsumerState<MovimentationsScreen> {
                 children: [
                   Lottie.asset('assets/lottie/not_found.json',
                       width: 150, height: 150),
-                  const Text(
-                    'Não há movimentações',
-                    style: TextStyle(fontSize: 25),
+                  Text(
+                    AppLocalizations.of(context)!.noMovimentations,
+                    style: const TextStyle(fontSize: 25),
                   ),
                 ],
               ),

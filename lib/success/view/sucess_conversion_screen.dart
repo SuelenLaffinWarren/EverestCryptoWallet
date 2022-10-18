@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SucessConversionScreen extends StatefulWidget {
   const SucessConversionScreen({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _SucessConversionScreenState extends State<SucessConversionScreen> {
               onPressed: () {
                 Navigator.of(context).pushNamed('/movimentations');
               },
-              child: const Text('Movimentações'))
+              child: Text(AppLocalizations.of(context)!.movimentations))
         ],
       ),
       body: Center(
@@ -39,15 +40,16 @@ class _SucessConversionScreenState extends State<SucessConversionScreen> {
           child: Column(
             children: [
               Lottie.asset('assets/lottie/check.json', width: 200, height: 200),
-              const Text(
-                'Conversão efetuada',
-                style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+              Text(
+                AppLocalizations.of(context)!.conversionPerformed,
+                style:
+                    const TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 15,
               ),
-              const Text('Conversão de moeda efetuada com sucesso!',
-                  style: TextStyle(
+              Text(AppLocalizations.of(context)!.currencyConversionSuccessful,
+                  style: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey)),

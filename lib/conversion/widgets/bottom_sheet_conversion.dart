@@ -5,6 +5,7 @@ import '../provider/conversion_provider.dart';
 import '../../portfolio/model/crypto_view_data.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomSheetConversion extends StatefulHookConsumerWidget {
   BottomSheetConversion({
@@ -34,10 +35,10 @@ class _BottomSheetConversionState extends ConsumerState<BottomSheetConversion> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Valor inválido"),
+            title: Text(AppLocalizations.of(context)!.invalidValue),
             actions: [
               TextButton(
-                child: const Text("Fechar"),
+                child: Text(AppLocalizations.of(context)!.close),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -53,10 +54,10 @@ class _BottomSheetConversionState extends ConsumerState<BottomSheetConversion> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("O campo de valor está vazio!"),
+            title: Text(AppLocalizations.of(context)!.valueFieldEmpty),
             actions: [
               TextButton(
-                child: const Text("Fechar"),
+                child: Text(AppLocalizations.of(context)!.close),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -92,14 +93,14 @@ class _BottomSheetConversionState extends ConsumerState<BottomSheetConversion> {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(
+                Padding(
+                  padding: const EdgeInsets.only(
                     top: 15,
                     left: 15,
                   ),
                   child: Text(
-                    'Total estimado',
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.estimatedTotal,
+                    style: const TextStyle(
                         fontSize: 17, color: Color.fromRGBO(117, 118, 128, 1)),
                   ),
                 ),

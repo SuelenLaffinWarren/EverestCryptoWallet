@@ -87,10 +87,6 @@
     "@currencyConversionSuccessful":{
         "description": "Success page text 2"
     },
-    "movimentations": "Movimentations",
-    "@movimentations":{
-        "description": "Movimentations page app bar"
-    },
     "proof": "Proof",
     "@proof":{
         "description": "Movimentations page proof movements"
@@ -102,6 +98,38 @@
     "movementQuantity": "Movement quantity",
     "@movementQuantity":{
         "description": "Movimentations page proof movements list item 2"
+    },
+    "balanceUnavailable": "Balance unavailable",
+    "@balanceUnavailable":{
+        "description": "Conversion page balance unavailable"
+    },
+    "invalidValue": "Invalid value",
+    "@invalidValue":{
+        "description": "Conversion page balance unavailable"
+    },
+    "close": "Close",
+    "@close":{
+        "description": "Conversion page alertDialog"
+    },
+    "valueFieldEmpty": "The value field is empty!",
+    "@valueFieldEmpty":{
+        "description": "Conversion page alertDialog"
+    },
+    "noMovimentations": "There are no movements",
+    "@noMovimentations":{
+        "description": "Movimentations page empty"
+    },
+    "dateFormat": "MM/dd/yyyy",
+    "@dateFormat":{
+        "description": "Date format"
+    },
+    "locale": "en-US",
+    "@locale":{
+        "description": "locale in numer format"
+    },
+    "coinLocale": "usd",
+    "@coinLocale":{
+        "description": "coin locale from api"
     }
 
 }
