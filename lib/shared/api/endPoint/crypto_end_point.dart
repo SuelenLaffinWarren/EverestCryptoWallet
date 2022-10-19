@@ -12,7 +12,7 @@ class CryptoEndPoint {
   Future<Response> getAllCrypto() {
     return _dio.get(getApi, queryParameters: {
       'ids': 'bitcoin,litecoin,ethereum,dogecoin,solana,tether',
-      'vs_currency': 'usd',
+      'vs_currency': 'brl',
     });
   }
 }

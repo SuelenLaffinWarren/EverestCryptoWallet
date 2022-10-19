@@ -1,9 +1,9 @@
+import '../../l10n/app_localizations.dart';
 import '../../shared/template/app_bar.dart';
 import '../widgets/body_convertion.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../shared/utils/arguments.dart';
 
 import '../widgets/bottom_sheet_conversion.dart';
@@ -27,11 +27,9 @@ class _ConversionBodyState extends ConsumerState<ConversionScreen> {
     return Scaffold(
       appBar: AppBarTemplate(title: AppLocalizations.of(context)!.toConvert),
       body: SafeArea(
-        child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: BodyConvertion(
-              args: widget.args,
-            )),
+        child: BodyConvertion(
+          args: widget.args,
+        ),
       ),
       bottomSheet: BottomSheetConversion(
         crypto: widget.args.cryptoData,

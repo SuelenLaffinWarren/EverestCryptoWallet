@@ -24,32 +24,30 @@ class CryptoListViewState extends ConsumerState<CryptoListView> {
 
     return cryptoViewData.when(
         data: (data) {
-          return Expanded(
-            flex: 1,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: data.cryptoListViewData.length,
-              itemBuilder: (context, index) {
-                final crypto = data.cryptoListViewData[index];
+          return ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: data.cryptoListViewData.length,
+            itemBuilder: (context, index) {
+              final crypto = data.cryptoListViewData[index];
 
-                return Column(
-                  children: [
-                    const Divider(
-                      thickness: 1,
-                    ),
-                    Material(
-                      child: CryptoListTile(
-                        crypto: crypto,
-                        isVisible: isVisible,
-                        userCryptoValue: Decimal.parse(
-                          ref.watch(userTotalProvider)[index].toString(),
-                        ),
+              return Column(
+                children: [
+                  const Divider(
+                    thickness: 1,
+                  ),
+                  Material(
+                    child: CryptoListTile(
+                      crypto: crypto,
+                      isVisible: isVisible,
+                      userCryptoValue: Decimal.parse(
+                        ref.watch(userTotalProvider)[index].toString(),
                       ),
                     ),
-                  ],
-                );
-              },
-            ),
+                  ),
+                ],
+              );
+            },
           );
         },
         error: (error, stackTrace) => const Center(

@@ -1,5 +1,6 @@
 import 'package:decimal/decimal.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../shared/utils/number_formater.dart';
 import '../provider/conversion_provider.dart';
 import 'row_convert_buttons.dart';
@@ -9,7 +10,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../portfolio/model/crypto_view_data.dart';
 import '../../shared/utils/arguments.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyConvertion extends StatefulHookConsumerWidget {
   BodyConvertion({
@@ -73,75 +73,80 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
       }
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          height: 49,
-          width: MediaQuery.of(context).size.width,
-          color: Colors.grey.shade200,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 13,
-              right: 13,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  AppLocalizations.of(context)!.balanceAvailable,
-                  style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.w400),
-                ),
-                Text(
-                    '${widget.args.userCryptoValue} ${widget.args.cryptoData.symbol.toUpperCase()}'),
-              ],
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 49,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.grey.shade200,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 13,
+                right: 13,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.balanceAvailable,
+                    style: const TextStyle(
+                        fontSize: 15, fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                      '${widget.args.userCryptoValue} ${widget.args.cryptoData.symbol.toUpperCase()}'),
+                ],
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 13, top: 20, bottom: 15),
-          child: Text(
-            AppLocalizations.of(context)!.howLikeConvert,
-            style: const TextStyle(
-                color: Colors.black, fontSize: 26, fontWeight: FontWeight.w700),
+          Padding(
+            padding: const EdgeInsets.only(left: 13, top: 20, bottom: 15),
+            child: Text(
+              AppLocalizations.of(context)!.howLikeConvert,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w700),
+            ),
           ),
-        ),
-        RowConvertButtons(
-          symbol: widget.args.cryptoData.symbol,
-          image: widget.args.cryptoData.image,
-          cryptoViewData: secondCrypto.state,
-          onChange: (CryptoViewData? selectedCrypto) {
-            secondCrypto.state = selectedCrypto!;
-            getConverterValue();
-            getTotalEstimated();
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 13, right: 20, top: 18),
-          child: TextFieldConversion(
-            hintText: '${widget.args.cryptoData.symbol.toUpperCase()} 0.00',
-            args: widget.args,
-            onChange: (value) {
+          RowConvertButtons(
+            symbol: widget.args.cryptoData.symbol,
+            image: widget.args.cryptoData.image,
+            cryptoViewData: secondCrypto.state,
+            onChange: (CryptoViewData? selectedCrypto) {
+              secondCrypto.state = selectedCrypto!;
               getConverterValue();
               getTotalEstimated();
-              buttonBottomSheet();
             },
           ),
-        ),
-        Padding(
-            padding: const EdgeInsets.only(left: 15, top: 10),
-            child: Text(
-                valueIsPossible()
-                    ? numberFormater
-                        .format(double.parse(convertPrice.state.toString()))
-                    : AppLocalizations.of(context)!.balanceUnavailable,
-                style: TextStyle(
-                    fontSize: 15,
-                    color: valueIsPossible()
-                        ? Colors.grey.shade600
-                        : Colors.red))),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(left: 13, right: 20, top: 18),
+            child: TextFieldConversion(
+              hintText: '${widget.args.cryptoData.symbol.toUpperCase()} 0.00',
+              args: widget.args,
+              onChange: (value) {
+                getConverterValue();
+                getTotalEstimated();
+                buttonBottomSheet();
+              },
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.only(left: 15, top: 10),
+              child: Text(
+                  valueIsPossible()
+                      ? numberFormater
+                          .format(double.parse(convertPrice.state.toString()))
+                      : AppLocalizations.of(context)!.balanceUnavailable,
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: valueIsPossible()
+                          ? Colors.grey.shade600
+                          : Colors.red))),
+        ],
+      ),
     );
   }
 }

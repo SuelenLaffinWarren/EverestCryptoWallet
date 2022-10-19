@@ -29,7 +29,7 @@ class _GraphicDetailsScreenState extends ConsumerState<GraphicDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     List<List<num>> listSpots = widget.listMarketData.values;
-    int graphicDay = listSpots.length - 1 - ref.watch(buttonDaysProvider);
+    int graphicDay = (listSpots.length) - 1 - ref.watch(buttonDaysProvider);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

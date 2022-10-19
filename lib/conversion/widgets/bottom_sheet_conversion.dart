@@ -1,11 +1,11 @@
 import 'package:decimal/decimal.dart';
 import 'package:everest_card2_listagem/revision/view/revision_screen.dart';
 import 'package:everest_card2_listagem/shared/utils/arguments.dart';
+import '../../l10n/app_localizations.dart';
 import '../provider/conversion_provider.dart';
 import '../../portfolio/model/crypto_view_data.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomSheetConversion extends StatefulHookConsumerWidget {
   BottomSheetConversion({

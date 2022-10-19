@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../l10n/app_localizations.dart';
 
 class SucessConversionScreen extends StatefulWidget {
   const SucessConversionScreen({Key? key}) : super(key: key);
@@ -15,7 +16,6 @@ class _SucessConversionScreenState extends State<SucessConversionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(''),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
           color: Colors.black,
