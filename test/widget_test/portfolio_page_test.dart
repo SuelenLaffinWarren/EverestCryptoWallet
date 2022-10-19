@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:decimal/decimal.dart';
 import 'package:everest_card2_listagem/portfolio/model/crypto_view_data.dart';
+import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:everest_card2_listagem/portfolio/view/home_portofolio_screen.dart';
 import 'package:everest_card2_listagem/portfolio/widgtes/crypto_list_tile.dart';
 import 'package:everest_card2_listagem/portfolio/widgtes/crypto_list_view.dart';
@@ -34,6 +35,8 @@ void main() {
     expect(find.byType(CryptoListView), findsOneWidget);
     expect(find.byType(InfoTitleColumnWallet), findsOneWidget);
     expect(find.byType(BottomNavigationWallet), findsOneWidget);
+    expect(find.byType(Padding), findsWidgets);
+    expect(find.byType(Expanded), findsWidgets);
     await tester.pump(const Duration(seconds: 5));
   });
 
@@ -50,11 +53,37 @@ void main() {
     await tester.tap(find.byType(IconButton));
     await tester.pump(const Duration(seconds: 5));
   });
-  testWidgets('WHEN the page is right THEN return the list view',
+  testWidgets('WHEN the page is right THEN return the list view loading',
       (WidgetTester tester) async {
     await loadPage(
-        tester, const SetupWidgetTester(locale: null, child: CryptoListView()));
-
+      tester,
+      SetupWidgetTester(
+        locale: null,
+        child: ProviderScope(
+          overrides: [
+            cryptoListProvider.overrideWithValue(const AsyncValue.loading())
+          ],
+          child: const CryptoListView(),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(seconds: 5));
+  });
+  testWidgets('WHEN the page is right THEN return the list view error',
+      (WidgetTester tester) async {
+    await loadPage(
+      tester,
+      SetupWidgetTester(
+        locale: null,
+        child: ProviderScope(
+          overrides: [
+            cryptoListProvider
+                .overrideWithValue(const AsyncValue.error(StackTrace))
+          ],
+          child: const CryptoListView(),
+        ),
+      ),
+    );
     await tester.pump(const Duration(seconds: 5));
   });
   testWidgets('WHEN the page is right THEN return the list tile',
@@ -77,11 +106,5 @@ void main() {
     await tester.tap(find.byType(CryptoListTile));
     await tester.pump(const Duration(seconds: 5));
     await tester.pump(const Duration(seconds: 5));
-  });
-
-  testWidgets('WHEN the page is right THEN return the bottom navigation',
-      (WidgetTester tester) async {
-    await loadPage(tester, const BottomNavigationWallet(selectedIndex: 1));
-    await tester.pump();
   });
 }

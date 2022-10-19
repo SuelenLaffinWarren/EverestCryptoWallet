@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../portfolio/model/crypto_view_data.dart';
 import '../../shared/utils/arguments.dart';
 import 'revision_button.dart';
 import 'row_revision.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyRevision extends StatelessWidget {
   const BodyRevision({

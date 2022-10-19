@@ -6,9 +6,9 @@ import 'package:everest_card2_listagem/portfolio/model/crypto_view_data.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../portfolio/provider/isVisible_provider.dart';
 import '../widgets/body_crypto_details.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailsCryptoScreen extends StatefulHookConsumerWidget {
   DetailsCryptoScreen({Key? key, required this.crypto, required this.userValue})

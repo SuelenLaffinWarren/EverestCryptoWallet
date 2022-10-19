@@ -5,8 +5,8 @@ import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../provider/isVisible_provider.dart';
 
 class InfoTitleColumnWallet extends StatefulHookConsumerWidget {

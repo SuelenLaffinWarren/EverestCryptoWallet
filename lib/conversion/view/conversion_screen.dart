@@ -1,9 +1,9 @@
+import '../../l10n/app_localizations.dart';
 import '../../shared/template/app_bar.dart';
 import '../widgets/body_convertion.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../shared/utils/arguments.dart';
 
 import '../widgets/bottom_sheet_conversion.dart';

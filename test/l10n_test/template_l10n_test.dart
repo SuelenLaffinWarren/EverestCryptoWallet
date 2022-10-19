@@ -1,5 +1,6 @@
+import 'package:everest_card2_listagem/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/cupertino.dart';
 
 class TemplateL10nTest extends StatelessWidget {
   const TemplateL10nTest({Key? key}) : super(key: key);

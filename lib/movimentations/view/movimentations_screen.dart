@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../shared/bottom_navigation/bottom_navigation_page.dart';
 
 import '../widgets/list_tile_movimentations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MovimentationsScreen extends StatefulHookConsumerWidget {
   static const route = '/movimentations';

@@ -1,5 +1,6 @@
 import 'package:decimal/decimal.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../shared/utils/number_formater.dart';
 import '../provider/conversion_provider.dart';
 import 'row_convert_buttons.dart';
@@ -9,7 +10,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../portfolio/model/crypto_view_data.dart';
 import '../../shared/utils/arguments.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyConvertion extends StatefulHookConsumerWidget {
   BodyConvertion({

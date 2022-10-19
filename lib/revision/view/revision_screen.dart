@@ -4,8 +4,7 @@ import 'package:everest_card2_listagem/shared/utils/arguments.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import '../../l10n/app_localizations.dart';
 import '../widgets/body_revision.dart';
 
 class RevisionScreen extends StatefulHookConsumerWidget {

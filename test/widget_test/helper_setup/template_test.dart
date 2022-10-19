@@ -2,6 +2,7 @@ import 'package:decimal/decimal.dart';
 import 'package:everest_card2_listagem/conversion/provider/conversion_provider.dart';
 import 'package:everest_card2_listagem/crypto_details/model/market_graphic_view_data.dart';
 import 'package:everest_card2_listagem/crypto_details/providers_details/providers_details.dart';
+import 'package:everest_card2_listagem/l10n/app_localizations.dart';
 import 'package:everest_card2_listagem/portfolio/model/crypto_list_view_data.dart';
 import 'package:everest_card2_listagem/portfolio/model/crypto_view_data.dart';
 import 'package:everest_card2_listagem/portfolio/provider/crypto_provider.dart';
@@ -9,7 +10,6 @@ import 'package:everest_card2_listagem/shared/routes/routes.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SetupWidgetTester extends StatelessWidget {
   final Widget child;
@@ -61,8 +61,15 @@ class SetupWidgetTester extends StatelessWidget {
             ),
           ),
         ),
-        buttonDaysProvider.overrideWithValue(StateController(-5)),
-        marketGraphicDataProvider.overriddenFamily(marketData),
+        marketGraphicDataProvider.overrideWithProvider(
+          (argument) => Provider(
+            (ref) => AsyncValue.data(
+              MarketGraphicViewData(
+                values: List<List<num>>.generate(90, (index) => [index]),
+              ),
+            ),
+          ),
+        ),
       ],
       child: MaterialApp(
         locale: locale ?? const Locale('en'),
