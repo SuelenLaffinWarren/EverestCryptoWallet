@@ -18,15 +18,16 @@ void main() {
   Future<void> loadPage(WidgetTester tester, Widget child) async {
     await tester.pumpWidget(MaterialApp(
       home: SetupWidgetTester(
+        locale: null,
         child: child,
       ),
     ));
   }
 
-  testWidgets('WHEN the page is right THEN return the page',
+  testWidgets('WHEN the page is right THEN return the row with the buttons',
       (WidgetTester tester) async {
-    await loadPage(
-        tester, const SetupWidgetTester(child: RowButtonsGraphicDays()));
+    await loadPage(tester,
+        const SetupWidgetTester(locale: null, child: RowButtonsGraphicDays()));
     expect(find.byType(ButtonDayGraphic), findsWidgets);
     expect(find.text("5D"), findsOneWidget);
     expect(find.text("15D"), findsOneWidget);
@@ -36,7 +37,7 @@ void main() {
     await tester.pump(const Duration(seconds: 5));
   });
 
-  testWidgets('WHEN the page is right THEN return the page',
+  testWidgets('WHEN the page is right THEN return the details page',
       (WidgetTester tester) async {
     await loadPage(
         tester,
@@ -50,9 +51,15 @@ void main() {
                     Faker().randomGenerator.integer(10).toDouble(),
                 symbol: 'btc'),
             userValue: Decimal.ten));
-    await tester.pump(const Duration(seconds: 5));
+    expect(find.byType(BodyCryptoDetails), findsOneWidget);
+    expect(find.byType(AppBar), findsOneWidget);
+    expect(find.byType(IconButton), findsOneWidget);
+
+    await tester.tap(find.byType(IconButton));
+
+    await tester.pumpAndSettle(const Duration(seconds: 5));
   });
-  testWidgets('WHEN the page is right THEN return the page',
+  testWidgets('WHEN the page is right THEN return the body details page',
       (WidgetTester tester) async {
     await loadPage(
         tester,
@@ -67,7 +74,10 @@ void main() {
               symbol: 'btc'),
           userValue: Decimal.ten,
         ));
-
+    await tester.tap(find.byType(ElevatedButton));
+    expect(find.byType(Container), findsWidgets);
+    expect(find.byType(Padding), findsWidgets);
+    expect(find.byType(SizedBox), findsWidgets);
     await tester.pump(const Duration(seconds: 5));
   });
 }

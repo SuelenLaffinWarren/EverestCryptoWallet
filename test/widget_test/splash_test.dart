@@ -14,14 +14,16 @@ void main() {
   Future<void> loadPage(WidgetTester tester, Widget child) async {
     await tester.pumpWidget(MaterialApp(
       home: SetupWidgetTester(
+        locale: null,
         child: child,
       ),
     ));
   }
 
-  testWidgets('WHEN the list view is righ, THEN return the cryptos',
+  testWidgets('WHEN the list view is righ, THEN return the home page(porfolio)',
       (WidgetTester tester) async {
-    await loadPage(tester, const SetupWidgetTester(child: SplashScreen()));
+    await loadPage(
+        tester, const SetupWidgetTester(locale: null, child: SplashScreen()));
 
     expect(find.byType(Lottie), findsOneWidget);
     expect(find.byType(Center), findsOneWidget);

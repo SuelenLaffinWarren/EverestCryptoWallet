@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:decimal/decimal.dart';
-import 'package:everest_card2_listagem/portfolio/mapper/crypto_mapper.dart';
 import 'package:everest_card2_listagem/portfolio/model/crypto_view_data.dart';
 import 'package:everest_card2_listagem/portfolio/view/home_portofolio_screen.dart';
 import 'package:everest_card2_listagem/portfolio/widgtes/crypto_list_tile.dart';
@@ -22,56 +21,65 @@ void main() {
   Future<void> loadPage(WidgetTester tester, Widget child) async {
     await tester.pumpWidget(MaterialApp(
       home: SetupWidgetTester(
+        locale: null,
         child: child,
       ),
     ));
   }
 
-  testWidgets('WHEN the page is right THEN return the page',
+  testWidgets('WHEN the page is right THEN return the  portfolio page',
       (WidgetTester tester) async {
-    await loadPage(
-        tester, const SetupWidgetTester(child: HomePortfolioScreen()));
+    await loadPage(tester,
+        const SetupWidgetTester(locale: null, child: HomePortfolioScreen()));
     expect(find.byType(CryptoListView), findsOneWidget);
     expect(find.byType(InfoTitleColumnWallet), findsOneWidget);
     expect(find.byType(BottomNavigationWallet), findsOneWidget);
     await tester.pump(const Duration(seconds: 5));
   });
 
-  testWidgets('WHEN the page is right THEN return the page',
+  testWidgets('WHEN the page is right THEN return the info title',
       (WidgetTester tester) async {
-    await loadPage(
-        tester, const SetupWidgetTester(child: InfoTitleColumnWallet()));
+    await loadPage(tester,
+        const SetupWidgetTester(locale: null, child: InfoTitleColumnWallet()));
     expect(find.text('Crypto'), findsOneWidget);
+    expect(find.byType(SizedBox), findsWidgets);
+    expect(find.byType(Padding), findsWidgets);
+    expect(find.byType(Text), findsWidgets);
+
     expect(find.byIcon(Icons.visibility), findsOneWidget);
+    await tester.tap(find.byType(IconButton));
     await tester.pump(const Duration(seconds: 5));
   });
-  testWidgets('WHEN the page is right THEN return the page',
+  testWidgets('WHEN the page is right THEN return the list view',
       (WidgetTester tester) async {
-    await loadPage(tester, const SetupWidgetTester(child: CryptoListView()));
+    await loadPage(
+        tester, const SetupWidgetTester(locale: null, child: CryptoListView()));
 
     await tester.pump(const Duration(seconds: 5));
   });
-  testWidgets('WHEN the page is right THEN return the page',
+  testWidgets('WHEN the page is right THEN return the list tile',
       (WidgetTester tester) async {
     await loadPage(
         tester,
         SetupWidgetTester(
+            locale: null,
             child: CryptoListTile(
-          crypto: CryptoViewData(
-              current_price: Decimal.one,
-              id: 'bitcoin',
-              image: Faker().image.image(),
-              name: 'Bitcoin',
-              price_change_percentage_24h: 1,
-              symbol: 'btc'),
-          isVisible: StateController(const bool.hasEnvironment('false')),
-          userCryptoValue: Decimal.ten,
-        )));
-
+              crypto: CryptoViewData(
+                  current_price: Decimal.one,
+                  id: 'bitcoin',
+                  image: Faker().image.image(),
+                  name: 'Bitcoin',
+                  price_change_percentage_24h: 1,
+                  symbol: 'btc'),
+              isVisible: StateController(const bool.hasEnvironment('false')),
+              userCryptoValue: Decimal.ten,
+            )));
+    await tester.tap(find.byType(CryptoListTile));
+    await tester.pump(const Duration(seconds: 5));
     await tester.pump(const Duration(seconds: 5));
   });
 
-  testWidgets('WHEN the page is right THEN return the page',
+  testWidgets('WHEN the page is right THEN return the bottom navigation',
       (WidgetTester tester) async {
     await loadPage(tester, const BottomNavigationWallet(selectedIndex: 1));
     await tester.pump();

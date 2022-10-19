@@ -43,16 +43,6 @@ class DetailsCryptoScreenState extends ConsumerState<DetailsCryptoScreen> {
               icon: const Icon(Icons.arrow_back)),
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
-          actions: [
-            IconButton(
-              icon: Icon(isVisibleState.state
-                  ? Icons.visibility
-                  : Icons.visibility_off),
-              onPressed: () => setState(
-                (() => isVisibleState.state = !isVisibleState.state),
-              ),
-            ),
-          ],
         ),
         body: BodyCryptoDetails(
           crypto: widget.crypto,

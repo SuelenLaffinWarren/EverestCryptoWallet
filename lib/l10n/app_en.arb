@@ -43,7 +43,7 @@
     "@convertCurrency":{
         "description": "Details page button "
     },
-    "toConvert": " To Convert",
+    "toConvert": "To Convert",
     "@toConvert":{
         "description": "Convert page app bar "
     },

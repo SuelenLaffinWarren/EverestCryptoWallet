@@ -1,5 +1,6 @@
 import 'package:decimal/decimal.dart';
 import 'package:everest_card2_listagem/conversion/provider/conversion_provider.dart';
+import 'package:everest_card2_listagem/crypto_details/model/market_graphic_view_data.dart';
 import 'package:everest_card2_listagem/crypto_details/providers_details/providers_details.dart';
 import 'package:everest_card2_listagem/portfolio/model/crypto_list_view_data.dart';
 import 'package:everest_card2_listagem/portfolio/model/crypto_view_data.dart';
@@ -12,8 +13,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SetupWidgetTester extends StatelessWidget {
   final Widget child;
+  final Locale? locale;
 
-  const SetupWidgetTester({Key? key, required this.child}) : super(key: key);
+  const SetupWidgetTester({Key? key, required this.child, required this.locale})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +46,9 @@ class SetupWidgetTester extends StatelessWidget {
       price_change_percentage_24h: 2,
       symbol: 'ltc',
     );
+    final MarketGraphicViewData marketData = MarketGraphicViewData(values: [
+      [0, 4, 6, 10, 20]
+    ]);
     return ProviderScope(
       overrides: [
         secondSelectedCryptoProvider.overrideWithValue(
@@ -55,9 +61,11 @@ class SetupWidgetTester extends StatelessWidget {
             ),
           ),
         ),
-        buttonDaysProvider.overrideWithValue(StateController(int.parse('5')))
+        buttonDaysProvider.overrideWithValue(StateController(-5)),
+        marketGraphicDataProvider.overriddenFamily(marketData),
       ],
       child: MaterialApp(
+        locale: locale ?? const Locale('en'),
         onGenerateRoute: RoutesApp.generateRoute,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

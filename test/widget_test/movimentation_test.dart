@@ -20,6 +20,7 @@ void main() {
   Future<void> loadPage(WidgetTester tester, Widget child) async {
     await tester.pumpWidget(MaterialApp(
       home: SetupWidgetTester(
+        locale: null,
         child: child,
       ),
     ));
@@ -29,15 +30,13 @@ void main() {
       'WHEN the widgets are running, THEN return the movimentations page',
       (WidgetTester tester) async {
     await loadPage(tester, const MovimentationsScreen());
-
-    await tester.pump();
-  });
-  testWidgets('WHEN the widgets are running, THEN return the bottom navigation',
-      (WidgetTester tester) async {
-    await loadPage(tester, const MovimentationsScreen());
     expect(find.byType(BottomNavigationWallet), findsOneWidget);
-    await tester.pump();
+    expect(find.byType(Scaffold), findsWidgets);
+    expect(find.byType(Visibility), findsOneWidget);
+
+    await tester.pump(const Duration(seconds: 4));
   });
+
   testWidgets('WHEN the widgets are running, THEN return the lisTile',
       (WidgetTester tester) async {
     await loadPage(
@@ -59,10 +58,11 @@ void main() {
     expect(find.byType(Padding), findsWidgets);
     expect(find.byType(Row), findsWidgets);
 
-    await tester.pump();
+    await tester.tap(find.byType(ListTileMovimentation));
+
+    await tester.pump(const Duration(seconds: 5));
   });
-  testWidgets(
-      'WHEN the widgets are running, THEN return the movimentations page',
+  testWidgets('WHEN the widgets are running, THEN return the proof page',
       (WidgetTester tester) async {
     await loadPage(
         tester,

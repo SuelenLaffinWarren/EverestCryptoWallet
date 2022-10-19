@@ -6,10 +6,11 @@ import 'package:lottie/lottie.dart';
 import 'template_test.dart';
 
 void main() {
-  testWidgets('WHEN Success Page is working, THEN return lottie ',
+  testWidgets(
+      'WHEN Success Page is working, THEN return lottie and the sucess page ',
       (WidgetTester tester) async {
-    await tester
-        .pumpWidget(const SetupWidgetTester(child: SucessConversionScreen()));
+    await tester.pumpWidget(
+        const SetupWidgetTester(locale: null, child: SucessConversionScreen()));
     final Finder lottieFinder = find.byType(Lottie);
     expect(lottieFinder, findsOneWidget);
     expect(find.byType(TextButton), findsOneWidget);

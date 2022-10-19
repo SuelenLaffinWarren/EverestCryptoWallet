@@ -19,6 +19,7 @@ void main() {
   Future<void> loadPage(WidgetTester tester, Widget child) async {
     await tester.pumpWidget(MaterialApp(
       home: SetupWidgetTester(
+        locale: null,
         child: child,
       ),
     ));
@@ -29,25 +30,27 @@ void main() {
     await loadPage(
         tester,
         SetupWidgetTester(
+            locale: null,
             child: ConversionScreen(
-          args: Arguments(
-              cryptoData: CryptoViewData(
-                  current_price: Decimal.one,
-                  id: 'bitcoin',
-                  image: Faker().image.image(),
-                  name: 'Bitcoin',
-                  price_change_percentage_24h: 1,
-                  symbol: 'btc'),
-              userCryptoValue: Decimal.one),
-        )));
+              args: Arguments(
+                  cryptoData: CryptoViewData(
+                      current_price: Decimal.one,
+                      id: 'bitcoin',
+                      image: Faker().image.image(),
+                      name: 'Bitcoin',
+                      price_change_percentage_24h: 1,
+                      symbol: 'btc'),
+                  userCryptoValue: Decimal.one),
+            )));
 
-    await tester.pumpAndSettle();
+    await tester.pump();
   });
   testWidgets('WHEN the widgets are working, THEN return the bottom sheet ',
       (WidgetTester tester) async {
     await loadPage(
         tester,
         SetupWidgetTester(
+          locale: null,
           child: BottomSheetConversion(
               crypto: CryptoViewData(
                   current_price: Decimal.one,
@@ -59,26 +62,27 @@ void main() {
               userValue: Decimal.one),
         ));
 
-    await tester.pump();
+    await tester.pumpAndSettle();
   });
   testWidgets('WHEN the widgets are working, THEN return the textfield ',
       (WidgetTester tester) async {
     await loadPage(
         tester,
         SetupWidgetTester(
+            locale: null,
             child: TextFieldConversion(
-          args: Arguments(
-              cryptoData: CryptoViewData(
-                  current_price: Decimal.one,
-                  id: 'bitcoin',
-                  image: Faker().image.image(),
-                  name: 'Bitcoin',
-                  price_change_percentage_24h: 1,
-                  symbol: 'btc'),
-              userCryptoValue: Decimal.one),
-          hintText: '',
-          onChange: (String) {},
-        )));
+              args: Arguments(
+                  cryptoData: CryptoViewData(
+                      current_price: Decimal.one,
+                      id: 'bitcoin',
+                      image: Faker().image.image(),
+                      name: 'Bitcoin',
+                      price_change_percentage_24h: 1,
+                      symbol: 'btc'),
+                  userCryptoValue: Decimal.one),
+              hintText: '',
+              onChange: (String) {},
+            )));
 
     await tester.pump();
   });
