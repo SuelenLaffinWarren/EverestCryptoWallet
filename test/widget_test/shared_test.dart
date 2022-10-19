@@ -4,7 +4,7 @@ import 'package:everest_card2_listagem/shared/bottom_navigation/bottom_navigatio
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'template_test.dart';
+import 'helper_setup/template_test.dart';
 
 void main() {
   setUpAll(

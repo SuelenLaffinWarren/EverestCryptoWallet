@@ -10,7 +10,7 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'template_test.dart';
+import 'helper_setup/template_test.dart';
 
 void main() {
   setUpAll(
@@ -83,7 +83,7 @@ void main() {
               hintText: '',
               onChange: (String) {},
             )));
-
-    await tester.pump();
+    await tester.tap(find.byType(TextFieldConversion));
+    await tester.pump(const Duration(seconds: 5));
   });
 }
