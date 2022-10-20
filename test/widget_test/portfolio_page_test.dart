@@ -103,7 +103,7 @@ void main() {
               isVisible: StateController(const bool.hasEnvironment('false')),
               userCryptoValue: Decimal.ten,
             )));
-    await tester.tap(find.byType(CryptoListTile));
+
     await tester.pump(const Duration(seconds: 5));
     await tester.pump(const Duration(seconds: 5));
   });

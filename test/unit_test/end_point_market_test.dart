@@ -1,17 +1,18 @@
 import 'package:dio/dio.dart';
-import 'package:everest_card2_listagem/shared/api/endPoint/crypto_end_point.dart';
+import 'package:everest_card2_listagem/shared/api/endPoint/market_end_point.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'api_factory_datasource.dart';
+import '../mocktail/api_factory_datasource.dart';
 
 class DioMock extends Mock implements Dio {}
 
 void main() {
   late Response<Map<String, dynamic>> sucess;
   late DioMock dioMock;
-  late CryptoEndPoint cryptoEndPoint;
+
+  late MarketGraphicEndpoint marketGraphicEndpoint;
 
   When mockGetResponse() => when(
       () => dioMock.get(any(), queryParameters: any(named: 'queryParameters')));
@@ -23,15 +24,17 @@ void main() {
 
   setUp(() {
     dioMock = DioMock();
-    cryptoEndPoint = CryptoEndPoint(dioMock);
+
+    marketGraphicEndpoint = MarketGraphicEndpoint(dio: dioMock);
   });
 
   setUp(() {
-    sucess = mockResponse(ApiFakeModel.getAllCryptosFake(), 200);
+    sucess = mockResponse(ApiFakeModel.getCryptoMarketChart(), 200);
   });
-  test('WHEN getAllTransactions is requested THEN returns 200', (() async {
+
+  test('WHEN getCryptoMarketChart is requested THEN returns 200', (() async {
     mockGetResponse().thenAnswer((_) async => sucess);
-    final result = await cryptoEndPoint.getAllCrypto();
+    final result = await marketGraphicEndpoint.getCryptoMarketChart('bitcoin');
     expect(result.statusCode, equals(200));
     expect(result, sucess);
   }));

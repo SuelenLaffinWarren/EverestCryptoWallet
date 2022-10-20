@@ -12,7 +12,7 @@ CryptoResponse _$CryptoResponseFromJson(Map<String, dynamic> json) =>
       json['symbol'] as String,
       json['name'] as String,
       json['image'] as String,
-      (json['current_price'] as num).toDouble(),
+      (json['current_price']).toDouble(),
       (json['price_change_percentage_24h'] as num).toDouble(),
     );
 

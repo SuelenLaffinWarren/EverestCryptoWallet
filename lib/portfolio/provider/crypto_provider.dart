@@ -1,5 +1,4 @@
 import 'package:decimal/decimal.dart';
-import '../../crypto_details/model/market_graphic_view_data.dart';
 import '../model/crypto_list_view_data.dart';
 import '../useCase/total_crypto_value_use_case.dart';
 import '../../shared/api/repository/repository_provider.dart';
@@ -21,10 +20,6 @@ class CriptoNotifier extends StateNotifier<CryptoViewData> {
             symbol: '',
           ),
         );
-  void variationChange(int time) {
-    time = time == 1 ? 2 : time;
-    state.price_change_percentage_24h;
-  }
 }
 
 var cryptoModelProvider = StateNotifierProvider<CriptoNotifier, CryptoViewData>(
@@ -36,16 +31,6 @@ var currentPriceProvider = StateNotifierProvider<CurrentPriceNotifier, Decimal>(
 
 class CurrentPriceNotifier extends StateNotifier<Decimal> {
   CurrentPriceNotifier() : super(Decimal.parse('0'));
-
-  void getActualValueCrypto(int days, MarketGraphicViewData market) {
-    state = Decimal.parse('${market.values[days - 1]}');
-  }
-}
-
-class DecimalFormatter {
-  static double decimalFormatter(Decimal number) {
-    return double.parse(number.toString());
-  }
 }
 
 class FormatValueNumber {

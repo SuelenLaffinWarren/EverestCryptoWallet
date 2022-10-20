@@ -32,36 +32,48 @@ void main() {
     await loadPage(tester,
         const SetupWidgetTester(locale: null, child: RowButtonsGraphicDays()));
     expect(find.byType(ButtonDayGraphic), findsWidgets);
-    expect(find.text("5D"), findsOneWidget);
-    expect(find.text("15D"), findsOneWidget);
-    expect(find.text("30D"), findsOneWidget);
-    expect(find.text("45D"), findsOneWidget);
-    expect(find.text("90D"), findsOneWidget);
+    expect(find.text('5D'), findsOneWidget);
+    expect(find.text('15D'), findsOneWidget);
+    expect(find.text('30D'), findsOneWidget);
+    expect(find.text('45D'), findsOneWidget);
+    expect(find.text('90D'), findsOneWidget);
     await tester.pump(const Duration(seconds: 5));
   });
-
-  testWidgets('WHEN the page is right THEN return the details page',
+  testWidgets('WHEN the page is right THEN return the row with the DetailsPage',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(SetupWidgetTester(
+        locale: null,
+        child: DetailsCryptoScreen(
+          crypto: CryptoViewData(
+              current_price: Decimal.ten,
+              id: 'bitcoin',
+              image: Faker().image.image(),
+              name: 'Bitcoin',
+              price_change_percentage_24h:
+                  Faker().randomGenerator.integer(10).toDouble(),
+              symbol: 'btc'),
+          userValue: Decimal.ten,
+        )));
+    expect(find.byType(BodyCryptoDetails), findsOneWidget);
+    expect(find.byType(AppBar), findsOneWidget);
+    expect(find.byType(Scaffold), findsOneWidget);
+    await tester.tap(find.byType(IconButton));
+    await tester.pump(const Duration(seconds: 5));
+  });
+  testWidgets('WHEN the onPressed is right THEN return the results in graphic ',
       (WidgetTester tester) async {
     await loadPage(
         tester,
-        DetailsCryptoScreen(
-            crypto: CryptoViewData(
-                current_price: Decimal.ten,
-                id: 'bitcoin',
-                image: Faker().image.image(),
-                name: 'Bitcoin',
-                price_change_percentage_24h:
-                    Faker().randomGenerator.integer(10).toDouble(),
-                symbol: 'btc'),
-            userValue: Decimal.ten));
-    expect(find.byType(BodyCryptoDetails), findsOneWidget);
-    expect(find.byType(AppBar), findsOneWidget);
-    expect(find.byType(IconButton), findsOneWidget);
-
-    await tester.tap(find.byType(IconButton));
-
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+        const SetupWidgetTester(
+            locale: null,
+            child: ButtonDayGraphic(
+              daysButton: 5,
+              label: '',
+            )));
+    await tester.tap(find.byType(TextButton));
+    await tester.pump(const Duration(seconds: 5));
   });
+
   testWidgets('WHEN the page is right THEN return the body details page',
       (WidgetTester tester) async {
     await tester.pumpWidget(SetupWidgetTester(

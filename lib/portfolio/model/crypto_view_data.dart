@@ -23,11 +23,6 @@ class CryptoViewData {
     required this.price_change_percentage_24h,
   });
 
-  @override
-  String toString() {
-    return 'CryptoViewData(id: $id, symbol: $symbol, name: $name, image: $image, current_price: $current_price, price_change_percentage_24h: $price_change_percentage_24h)';
-  }
-
   userValueMoney(Decimal userAmount) {
     return current_price * userAmount;
   }

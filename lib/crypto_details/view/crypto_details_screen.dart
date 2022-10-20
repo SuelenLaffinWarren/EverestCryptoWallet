@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../portfolio/provider/isVisible_provider.dart';
 import '../widgets/body_crypto_details.dart';
 
 class DetailsCryptoScreen extends StatefulHookConsumerWidget {
@@ -25,8 +24,6 @@ class DetailsCryptoScreen extends StatefulHookConsumerWidget {
 class DetailsCryptoScreenState extends ConsumerState<DetailsCryptoScreen> {
   @override
   Widget build(BuildContext context) {
-    var isVisibleState = ref.watch(stateVisible.state);
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -38,7 +35,7 @@ class DetailsCryptoScreenState extends ConsumerState<DetailsCryptoScreen> {
           leading: IconButton(
               onPressed: () {
                 ref.watch(buttonDaysProvider.state).state;
-                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/portfolio');
               },
               icon: const Icon(Icons.arrow_back)),
           iconTheme: const IconThemeData(color: Colors.black),

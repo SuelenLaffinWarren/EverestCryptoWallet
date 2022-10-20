@@ -57,10 +57,11 @@ void main() {
     expect(find.byType(Text), findsWidgets);
     expect(find.byType(Padding), findsWidgets);
     expect(find.byType(Row), findsWidgets);
+    expect(find.byType(Row), findsWidgets);
 
-    await tester.tap(find.byType(ListTileMovimentation));
+    await tester.tap(find.byType(ListTile));
 
-    await tester.pump(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
   });
   testWidgets('WHEN the widgets are running, THEN return the proof page',
       (WidgetTester tester) async {

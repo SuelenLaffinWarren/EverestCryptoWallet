@@ -113,15 +113,12 @@ class CryptoListTile extends HookConsumerWidget {
           ],
         ),
       ),
-      trailing: Padding(
-        padding: const EdgeInsets.only(bottom: 35),
-        child: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.arrow_forward_ios,
-            color: Color.fromRGBO(117, 118, 128, 1),
-            size: 18,
-          ),
+      trailing: const Padding(
+        padding: EdgeInsets.only(bottom: 25),
+        child: Icon(
+          Icons.arrow_forward_ios,
+          color: Color.fromRGBO(117, 118, 128, 1),
+          size: 18,
         ),
       ),
     );
