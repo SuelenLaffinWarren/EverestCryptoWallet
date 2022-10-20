@@ -42,6 +42,9 @@ class _ProvidersTestState extends ConsumerState<ProvidersTest> {
     ref.watch(getCryptoUseCaseProvider);
     ref.watch(allCryptoListProvider);
     ref.watch(dateNowProvider);
+    ref.watch(getMarketChartDataProvider);
+    ref.watch(variationCryptoButtonProvider);
+    ref.watch(daySelectedCryptoProvider);
 
     return Container();
   }

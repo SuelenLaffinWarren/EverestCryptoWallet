@@ -1,7 +1,6 @@
 import 'package:decimal/decimal.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../shared/utils/number_formater.dart';
 import '../provider/conversion_provider.dart';
 import 'row_convert_buttons.dart';
 import 'text_field_conversion.dart';
@@ -10,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../portfolio/model/crypto_view_data.dart';
 import '../../shared/utils/arguments.dart';
+import 'package:intl/intl.dart';
 
 class BodyConvertion extends StatefulHookConsumerWidget {
   BodyConvertion({
@@ -137,7 +137,8 @@ class _BodyConvertionState extends ConsumerState<BodyConvertion> {
               padding: const EdgeInsets.only(left: 15, top: 10),
               child: Text(
                   valueIsPossible()
-                      ? numberFormater
+                      ? NumberFormat.simpleCurrency(
+                              locale: 'pt-BR', decimalDigits: 2, name: "R\$")
                           .format(double.parse(convertPrice.state.toString()))
                       : AppLocalizations.of(context)!.balanceUnavailable,
                   style: TextStyle(

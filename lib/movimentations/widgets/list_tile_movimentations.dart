@@ -23,104 +23,6 @@ class ListTileMovimentation extends StatefulHookConsumerWidget {
 class _ListTileMovimentationState extends ConsumerState<ListTileMovimentation> {
   @override
   Widget build(BuildContext context) {
-    void _showDialogProof() {
-      showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return SizedBox(
-            width: 100,
-            height: 300,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: ListTile(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.proof,
-                          style: const TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    ),
-                    subtitle: Column(
-                      children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        RowProofMovimentations(
-                          label1: AppLocalizations.of(context)!.date,
-                          label2: DateFormat(
-                                  AppLocalizations.of(context)!.dateFormat)
-                              .format(widget.movimentation.dateNow),
-                        ),
-                        const Divider(
-                          thickness: 1,
-                        ),
-                        RowProofMovimentations(
-                            label1:
-                                AppLocalizations.of(context)!.movementQuantity,
-                            label2:
-                                '${widget.movimentation.controller} ${widget.movimentation.firstSymbol.toUpperCase()}'),
-                        const Divider(
-                          thickness: 1,
-                        ),
-                        RowProofMovimentations(
-                            label1:
-                                AppLocalizations.of(context)!.estimatedTotal,
-                            label2:
-                                '${widget.movimentation.totalEstimated.toStringAsFixed(3)} ${widget.movimentation.secondCrypto.toUpperCase()}'),
-                        const Divider(
-                          thickness: 1,
-                        ),
-                        RowProofMovimentations(
-                            label1:
-                                AppLocalizations.of(context)!.convertCurrency,
-                            label2: NumberFormat.simpleCurrency(
-                                    decimalDigits: 3, locale: 'pt-BR')
-                                .format(widget.movimentation.convertPrice
-                                    .toDouble())),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.share_rounded,
-                                color: Colors.black,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.save_alt_outlined,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-    }
-
     return Column(
       children: [
         const Divider(
@@ -128,7 +30,102 @@ class _ListTileMovimentationState extends ConsumerState<ListTileMovimentation> {
         ),
         ListTile(
           onTap: () {
-            _showDialogProof();
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return SizedBox(
+                  width: 100,
+                  height: 300,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: ListTile(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!.proof,
+                                style: const TextStyle(
+                                    fontSize: 28, fontWeight: FontWeight.bold),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.close),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
+                          subtitle: Column(
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              RowProofMovimentations(
+                                label1: AppLocalizations.of(context)!.date,
+                                label2: DateFormat(AppLocalizations.of(context)!
+                                        .dateFormat)
+                                    .format(widget.movimentation.dateNow),
+                              ),
+                              const Divider(
+                                thickness: 1,
+                              ),
+                              RowProofMovimentations(
+                                  label1: AppLocalizations.of(context)!
+                                      .movementQuantity,
+                                  label2:
+                                      '${widget.movimentation.controller} ${widget.movimentation.firstSymbol.toUpperCase()}'),
+                              const Divider(
+                                thickness: 1,
+                              ),
+                              RowProofMovimentations(
+                                  label1: AppLocalizations.of(context)!
+                                      .estimatedTotal,
+                                  label2:
+                                      '${widget.movimentation.totalEstimated.toStringAsFixed(3)} ${widget.movimentation.secondCrypto.toUpperCase()}'),
+                              const Divider(
+                                thickness: 1,
+                              ),
+                              RowProofMovimentations(
+                                  label1: AppLocalizations.of(context)!
+                                      .convertCurrency,
+                                  label2: NumberFormat.simpleCurrency(
+                                          decimalDigits: 3, locale: 'pt-BR')
+                                      .format(widget.movimentation.convertPrice
+                                          .toDouble())),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.share_rounded,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.save_alt_outlined,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
           },
           horizontalTitleGap: 0,
           title: Padding(
